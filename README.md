@@ -8,22 +8,22 @@ Este repositorio puede ser añadido como una **extensión** en MakeCode.
 * abra [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * haga clic en **New Project**
 * haga clic en **Extensiones** en el menú del engranaje
-* buscar **https://github.com/werente/jovibit** e importar
+* buscar **https://github.com/ART2BIT/jovibit** e importar
 
-## Edita este proyecto ![Insignia de estado de compilación](https://github.com/werente/jovibit/workflows/MakeCode/badge.svg)
+## Edita este proyecto ![Insignia de estado de compilación](https://github.com/ART2BIT/jovibit/workflows/MakeCode/badge.svg)
 
 Para editar este repositorio en MakeCode.
 
 * abra [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * haga clic en **Import** luego haga clic en **Import URL**
-* pegue **https://github.com/werente/jovibit** y haga clic en importar
+* pegue **https://github.com/ART2BIT/jovibit** y haga clic en importar
 
 ## Vista previa de bloques
 
 Esta imagen muestra el código de los bloques de la última confirmación en master.
 Esta imagen puede tardar unos minutos en actualizarse.
 
-![Una vista renderizada de los bloques](https://github.com/werente/jovibit/raw/master/.github/makecode/blocks.png)
+![Una vista renderizada de los bloques](https://github.com/ART2BIT/jovibit/raw/master/.github/makecode/blocks.png)
 
 #### Metadatos (utilizados para búsqueda, renderizado)
 
