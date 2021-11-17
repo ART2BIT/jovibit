@@ -53,7 +53,7 @@ namespace JoviBit {
 
     }
     /**
-    * pontenciometre
+    * Potenciòmetre
     */
     //% blockId=pontenciometre block="proves"
     //% weight=15
