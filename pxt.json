@@ -7,7 +7,9 @@
     },
     "files": [
         "main.ts",
-        "README.md"
+        "README.md",
+        "sonarbit.ts",
+        "ponteciometre.ts"
     ],
     "testFiles": [
         "test.ts"
