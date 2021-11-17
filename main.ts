@@ -14,12 +14,12 @@ namespace JoviBit {
         //% block="polzada" enumval=2
         Unitat_Distancia_inch,
     }
-    /**
-    * Obté la distància ultrasònica
-    */
-    //% blockId=sonarbit block="Distància ultrasònica en %unitat_distancia |al|pin %pin"
-    //% weight=10
     export function sonarbit_distancia(unitat_distancia: Unitat_Distancia, pin: DigitalPin): number {
+        /**
+        * Obté la distància ultrasònica
+        */
+        //% blockId=sonarbit block="Distància ultrasònica en %unitat_distancia |al|pin %pin"
+        //% weight=10
 
         // send pulse
         pins.setPull(pin, PinPullMode.PullNone)
@@ -52,12 +52,14 @@ namespace JoviBit {
         }
 
     }
-    /**
-    * Potenciòmetre
-    */
-    //% blockId=pontenciometre block="proves"
-    //% weight=15
+    
+    
     export function pontenciometre(): void {
+        /**
+        * Potenciòmetre
+        */
+        //% blockId=pontenciometre block="proves"
+        //% weight=15
 
         basic.showNumber(420)
         basic.clearScreen()
