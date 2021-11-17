@@ -1,7 +1,7 @@
 /**
 * Custom blocks
 */
-//% color=#EBEE4A icon="\uf140"
+//% color=#FAD200 icon="\uf140"
 namespace JoviBit {
     enum Unitat_Distancia {
         //% block="mm" enumval=0
