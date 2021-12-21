@@ -62,18 +62,17 @@ namespace JoviBit {
     }
 
     /**
-    * Accelera pulsan "A"
+    * Activa o desactiva motor
     */
-    //% blockId=Motor_Brick block="Motor Brick"
+    //% blockId=Motor_Brick block="Activa o desactiva el motor al pin %pin"
     //% weight=10
-    export function motor(): void {
+    export function motor( pin : DigitalPin ): void {
         
-        if (pins.digitalReadPin(DigitalPin.P15) === 0) {
-            pins.digitalWritePin(DigitalPin.P15, 1)
+        if (pins.digitalReadPin(pin) === 0) {
+            pins.digitalWritePin(pin, 1)
         } else {
-            pins.digitalWritePin(DigitalPin.P15, 0)
+            pins.digitalWritePin(pin, 0)
         }
     }
-
 
 }
