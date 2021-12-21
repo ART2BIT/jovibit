@@ -20,7 +20,7 @@ enum Unitat_Distancia {
 */
 //% color=#ffdc00 icon="\uf140"
 namespace JoviBit {
-    
+
     /**
     * Obté la distància ultrasònica en la mesura seleccionada
     */
@@ -28,7 +28,7 @@ namespace JoviBit {
     //% weight=10
     //% block
     export function sonarbit_distancia(unitat_distancia: Unitat_Distancia, pin: DigitalPin): number {
-    
+
         // send pulse
         pins.setPull(pin, PinPullMode.PullNone)
         pins.digitalWritePin(pin, 0)
@@ -38,7 +38,7 @@ namespace JoviBit {
         pins.digitalWritePin(pin, 0)
 
         // read pulse
-        let d = pins.pulseIn(pin, PulseValue.High, 25000)  // 8 / 340 = 
+        let d = pins.pulseIn(pin, PulseValue.High, 25000)
         let distancia = d / 29 / 2
 
         if (distancia > 400) {
@@ -60,16 +60,20 @@ namespace JoviBit {
         }
 
     }
-    
+
     /**
-    * Potenciòmetre
+    * Accelera pulsan "A"
     */
-    //% blockId=pontenciometre block="proves"
+    //% blockId=Motor_Brick block="Motor Brick"
     //% weight=10
-    export function pontenciometre(): void {
-        basic.showString("Hello")
-        basic.clearScreen()
+    export function motor(): void {
+        
+        if (pins.digitalReadPin(DigitalPin.P15) === 0) {
+            pins.digitalWritePin(DigitalPin.P15, 1)
+        } else {
+            pins.digitalWritePin(DigitalPin.P15, 0)
+        }
     }
-    
+
 
 }
