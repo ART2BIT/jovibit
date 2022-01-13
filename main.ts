@@ -18,7 +18,7 @@ enum Unitat_Distancia {
 /**
 * Custom blocks
 */
-//% color=#ffdc00 icon="\uf140"
+//% color=#e89606 icon="\f0e7"
 namespace JoviBit {
 
     /**
@@ -74,5 +74,13 @@ namespace JoviBit {
             pins.digitalWritePin(pin, 0)
         }
     }
-
+    
+    /**
+     * 
+     */
+    //% blockId=Servo block="servo servo"
+    //% weight=10
+    export function servo( pin : DigitalPin ): void {
+        
+    }
 }
