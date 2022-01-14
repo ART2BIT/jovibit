@@ -15,6 +15,12 @@ enum Unitat_Distancia {
     Unitat_Distancia_inch,
 }
 
+enum pin {
+    //% block = "P0" enumval = 0
+
+    
+}
+
 /**
 * Custom blocks
 */
@@ -24,9 +30,9 @@ namespace JoviBit {
     /**
     * Obté la distància ultrasònica en la mesura seleccionada
     */
-    //% blockId=sonarbit block="Distància ultrasònica en %Unitat_distancia |al|pin %pin"
-    //% weight=10
-    //% block
+    //% blockId=sonarbit 
+    //% block="Distància ultrasònica en %Unitat_distancia |al|pin %pin"
+    //weight=10
     export function sonarbit_distancia(unitat_distancia: Unitat_Distancia, pin: DigitalPin): number {
 
         // send pulse
@@ -62,7 +68,7 @@ namespace JoviBit {
     }
 
     /**
-    * Activa o desactiva motor
+    * Activa o desactiva el motor
     */
     //% blockId=Motor_Brick block="Activa o desactiva el motor al pin %pin"
     //% weight=10
