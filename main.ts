@@ -15,11 +15,6 @@ enum Unitat_Distancia {
     Unitat_Distancia_inch,
 }
 
-enum pin {
-    //% block = "P0" enumval = 0
-
-    
-}
 
 /**
 * Custom blocks
@@ -81,12 +76,18 @@ namespace JoviBit {
         }
     }
     
+    // Mangado de Bitbot
     /**
-     * 
-     */
-    //% blockId=Servo block="servo servo"
-    //% weight=10
-    export function servo( pin : DigitalPin ): void {
+      * Se intenta no tocar el codigo interior.
+      * @param void
+      */
+    //% blockId="Servo" block="Inicializamos el Servo | %PwmOnlyPin"
+    //% weight=100
+    //% subcategory=Servo
+    /*export function servo(cosa: PwmOnlyPin ): void {
         
-    }
+        servos.Servo.prototype.setAngle(90)
+        
+
+    }*/
 }
