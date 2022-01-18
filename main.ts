@@ -88,7 +88,7 @@ namespace JoviBit {
     let servoCancel: boolean []=[];
     
 
-    //helper
+    //Funciones helper
     function initPCA(): void {
         
         let i2cData = pins.createBuffer(2);
@@ -189,5 +189,69 @@ namespace JoviBit {
             while(servoCancel[servo])
             basic.pause(1)
         }
+        angle = Math.max(Math.min(90, angle),-90)
+        speed = Math.max(Math.min(1000, speed),1)
+        delay = Math.round(1000/speed)
+        servoTarget[servo] = angle;
+        if(angle < servoActual[servo]){
+            step = -1;
+            control.inBackground(() => {
+                while (servoActual[servo] !=servoTarget[servo]){
+
+                    if(servoCancel[servo]){
+
+                        servoCancel[servo] = false
+                        break                        
+                    }
+                    setServoRaw(servo, servoActual[servo]+ step);
+                    basic.pause(delay)
+                
+                }
+
+            })
+        }
+    }
+    /**
+     * devuelve la posición actual
+     * @param servo Servo number (0 to 15)
+     */
+    //% blockId="getServoActual" block="servo %servo| actual position"
+    //% weight=10
+    //% subcategory=Servo
+    export function getServoActual(servo: number): number{
+        return servoActual[servo];
+    }
+
+    /**
+     * Devuelve la posición objetivo
+     * @param servo Servo number (0 to 15)
+     */
+    //% blockId="getServoTarget" block="servo %servo| target position"
+    //% weight=5
+    //% subcategory=Servo
+    export function getServoTarget(servo: number): number{
+        return servoTarget[servo];
+    }
+
+    /**
+     * comprueba si el servo ha llegado al objetivo
+     * @param servo Servo number (0 to 15)
+     */
+    //% blockId="isServoDone" block="servo %servo| ha terminado"
+    //% weight=5
+    //% subcategory=Servo
+    export function isServoDone(servo: number): boolean{
+        return servoTarget[servo]==servoActual[servo];
+    }
+
+    /**
+     * espera hasta que el servo llegue a la posicion objetivo
+     * @param servo Servo number (0 hasta 15)
+     */
+    //% blockId="waitServo" block="espera por el servo %servo"
+    //% weight=5
+    //% subcategory=servos
+    export function waitServo(servo: number): void{
+        while (servoActual[servo] != servoTarget[servo]) { basic.pause(10); } //intentar no utilizar demasiado esta función
     }
 }
