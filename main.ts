@@ -179,7 +179,7 @@ namespace JoviBit {
     //%weight=70
     //%angle.min=-90 angle.max=90
     //%speed.min=1 speed.max=1000
-    //% subcategory = Servo
+    //%subcategory=Servo
     export function moverServo(servo: number, angle: number, speed:number): void{
         let step = 1;
         let delay = 10; 
