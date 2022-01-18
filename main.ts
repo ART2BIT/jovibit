@@ -123,7 +123,7 @@ namespace JoviBit {
      */
     //%blockId = "centraServos"
     //%block="Centra todos los Servos"
-    //%subcategory=Servos
+    //% subcategory=Servo
     export function centraServos(): void{
         for(let i=0; i<16; i++){
             for (let i=0; i<16; i++){
@@ -137,10 +137,10 @@ namespace JoviBit {
      * @param servo Servo numero(0 to 15)
      * @param angle degrees to turn servo(-90 to +90)
      */
-    //%blockId="setServo" block="Establece el servo %servo| al angulo %angle"
-    //%weight=70
-    //%angle.min=-90 angle.max=+90
-    //%sybcategory=Servo
+    //% blockId="setServo" block="Establece el servo %servo| al angulo %angle"
+    //% weight=70
+    //% angle.min=-90 angle.max=+90
+    //% subcategory=Servo
     export function setServo(servo: number, angle:number):void{
 
         setServoRaw(servo, angle);
@@ -250,7 +250,7 @@ namespace JoviBit {
      */
     //% blockId="waitServo" block="espera por el servo %servo"
     //% weight=5
-    //% subcategory=servos
+    //% subcategory=Servo
     export function waitServo(servo: number): void{
         while (servoActual[servo] != servoTarget[servo]) { basic.pause(10); } //intentar no utilizar demasiado esta función
     }
