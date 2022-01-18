@@ -171,13 +171,13 @@ namespace JoviBit {
     //% weight=70
     //% angle.min=-90 angle.max=+90
     //% subcategory=Servo
-    export function setServo(Servo: number, angle:number):void{
+    export function setServo(servo: Servo, angle:number):void{
 
-        setServoRaw(Servo, angle);
-        servoTarget[Servo] = angle;
+        setServoRaw(servo, angle);
+        servoTarget[servo] = angle;
     }
 
-    function setServoRaw(servo: number, angle: number): void{
+    function setServoRaw(servo: Servo, angle: number): void{
 
         if(initI2C == false){
             initPCA();
@@ -210,30 +210,30 @@ namespace JoviBit {
     //% angle.min=-90 angle.max=90
     //% speed.min=1 speed.max=1000
     //% subcategory=Servo
-    export function moverServo(Servo: number, angle: number, speed:number): void{
+    export function moverServo(servo: Servo, angle: number, speed:number): void{
         let step = 1;
         let delay = 10; 
-        if (servoTarget[Servo] != servoActual[Servo])
+        if (servoTarget[servo] != servoActual[servo])
         {
-            servoCancel[Servo] = true;
-            while(servoCancel[Servo])
+            servoCancel[servo] = true;
+            while(servoCancel[servo])
             basic.pause(1)
         }
         angle = Math.max(Math.min(90, angle),-90)
         speed = Math.max(Math.min(1000, speed),1)
         delay = Math.round(1000/speed)
-        servoTarget[Servo] = angle;
-        if(angle < servoActual[Servo]){
+        servoTarget[servo] = angle;
+        if(angle < servoActual[servo]){
             step = -1;
             control.inBackground(() => {
-                while (servoActual[Servo] !=servoTarget[Servo]){
+                while (servoActual[servo] !=servoTarget[servo]){
 
-                    if(servoCancel[Servo]){
+                    if (servoCancel[servo]){
 
-                        servoCancel[Servo] = false
+                        servoCancel[servo] = false
                         break                        
                     }
-                    setServoRaw(Servo, servoActual[Servo]+ step);
+                    setServoRaw(servo, servoActual[servo]+ step);
                     basic.pause(delay)
                 
                 }
@@ -248,8 +248,8 @@ namespace JoviBit {
     //% blockId="getServoActual" block="servo %Servo| actual position"
     //% weight=10
     //% subcategory=Servo
-    export function getServoActual(Servo: number): number{
-        return servoActual[Servo];
+    export function getServoActual(servo: Servo): number{
+        return servoActual[servo];
     }
 
     /**
@@ -259,8 +259,8 @@ namespace JoviBit {
     //% blockId="getServoTarget" block="servo %Servo| posición objetivo"
     //% weight=5
     //% subcategory=Servo
-    export function getServoTarget(Servo: number): number{
-        return servoTarget[Servo];
+    export function getServoTarget(servo: Servo): number{
+        return servoTarget[servo];
     }
 
     /**
@@ -270,8 +270,8 @@ namespace JoviBit {
     //% blockId="isServoDone" block="servo %Servo| ha terminado"
     //% weight=5
     //% subcategory=Servo
-    export function isServoDone(Servo: number): boolean{
-        return servoTarget[Servo]==servoActual[Servo];
+    export function isServoDone(servo: Servo): boolean{
+        return servoTarget[servo]==servoActual[servo];
     }
 
     /**
@@ -281,7 +281,7 @@ namespace JoviBit {
     //% blockId="waitServo" block="espera por el servo %Servo"
     //% weight=5
     //% subcategory=Servo
-    export function waitServo(Servo: number): void{
-        while (servoActual[Servo] != servoTarget[Servo]) { basic.pause(10); } //intentar no utilizar demasiado esta función
+    export function waitServo(servo: Servo): void{
+        while (servoActual[servo] != servoTarget[servo]) { basic.pause(10); } //intentar no utilizar demasiado esta función
     }
 }
