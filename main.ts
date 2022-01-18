@@ -15,6 +15,36 @@ enum Unitat_Distancia {
     Unitat_Distancia_inch,
 }
 
+enum Servo{
+    //% block="A" enumval = 0
+
+    P0,
+
+    //% block="B" enumval = 1
+
+    P1,
+
+    //% block="C" enumval = 2
+
+    P2,
+    
+    //% block="D" enumval = 8
+
+    P8,
+
+    //% block="E" enumval = 13
+
+    P13,
+
+    //% block="F" enumval = 14
+
+    P14,
+
+    //% block="G" enumval = 15
+
+    P15,
+}
+
 
 /**
 * Custom blocks
@@ -137,14 +167,14 @@ namespace JoviBit {
      * @param servo Servo numero(0 to 15)
      * @param angle degrees to turn servo(-90 to +90)
      */
-    //% blockId="setServo" block="Establece el servo %servo| al angulo %angle"
+    //% blockId="setServo" block="Establece el servo %Servo| al angulo %angle"
     //% weight=70
     //% angle.min=-90 angle.max=+90
     //% subcategory=Servo
-    export function setServo(servo: number, angle:number):void{
+    export function setServo(Servo: number, angle:number):void{
 
-        setServoRaw(servo, angle);
-        servoTarget[servo] = angle;
+        setServoRaw(Servo, angle);
+        servoTarget[Servo] = angle;
     }
 
     function setServoRaw(servo: number, angle: number): void{
@@ -175,35 +205,35 @@ namespace JoviBit {
      * @param angle degrees to turn to (-90 to +90)
      * @param speed degrees per second to move (1  to 1000) eg: 60
      */
-    //%blockId="moveServo" block="mover Servo %servo| al angulo %angle| a la velocidad %speed| degrees/sec"
-    //%weight=70
-    //%angle.min=-90 angle.max=90
-    //%speed.min=1 speed.max=1000
-    //%subcategory=Servo
-    export function moverServo(servo: number, angle: number, speed:number): void{
+    //% blockId="moveServo" block="mover Servo %Servo| al angulo %angle| a la velocidad %speed| degrees/sec"
+    //% weight=70
+    //% angle.min=-90 angle.max=90
+    //% speed.min=1 speed.max=1000
+    //% subcategory=Servo
+    export function moverServo(Servo: number, angle: number, speed:number): void{
         let step = 1;
         let delay = 10; 
-        if (servoTarget[servo] != servoActual[servo])
+        if (servoTarget[Servo] != servoActual[Servo])
         {
-            servoCancel[servo] = true;
-            while(servoCancel[servo])
+            servoCancel[Servo] = true;
+            while(servoCancel[Servo])
             basic.pause(1)
         }
         angle = Math.max(Math.min(90, angle),-90)
         speed = Math.max(Math.min(1000, speed),1)
         delay = Math.round(1000/speed)
-        servoTarget[servo] = angle;
-        if(angle < servoActual[servo]){
+        servoTarget[Servo] = angle;
+        if(angle < servoActual[Servo]){
             step = -1;
             control.inBackground(() => {
-                while (servoActual[servo] !=servoTarget[servo]){
+                while (servoActual[Servo] !=servoTarget[Servo]){
 
-                    if(servoCancel[servo]){
+                    if(servoCancel[Servo]){
 
-                        servoCancel[servo] = false
+                        servoCancel[Servo] = false
                         break                        
                     }
-                    setServoRaw(servo, servoActual[servo]+ step);
+                    setServoRaw(Servo, servoActual[Servo]+ step);
                     basic.pause(delay)
                 
                 }
@@ -215,43 +245,43 @@ namespace JoviBit {
      * devuelve la posición actual
      * @param servo Servo number (0 to 15)
      */
-    //% blockId="getServoActual" block="servo %servo| actual position"
+    //% blockId="getServoActual" block="servo %Servo| actual position"
     //% weight=10
     //% subcategory=Servo
-    export function getServoActual(servo: number): number{
-        return servoActual[servo];
+    export function getServoActual(Servo: number): number{
+        return servoActual[Servo];
     }
 
     /**
      * Devuelve la posición objetivo
      * @param servo Servo number (0 to 15)
      */
-    //% blockId="getServoTarget" block="servo %servo| target position"
+    //% blockId="getServoTarget" block="servo %Servo| posición objetivo"
     //% weight=5
     //% subcategory=Servo
-    export function getServoTarget(servo: number): number{
-        return servoTarget[servo];
+    export function getServoTarget(Servo: number): number{
+        return servoTarget[Servo];
     }
 
     /**
      * comprueba si el servo ha llegado al objetivo
      * @param servo Servo number (0 to 15)
      */
-    //% blockId="isServoDone" block="servo %servo| ha terminado"
+    //% blockId="isServoDone" block="servo %Servo| ha terminado"
     //% weight=5
     //% subcategory=Servo
-    export function isServoDone(servo: number): boolean{
-        return servoTarget[servo]==servoActual[servo];
+    export function isServoDone(Servo: number): boolean{
+        return servoTarget[Servo]==servoActual[Servo];
     }
 
     /**
      * espera hasta que el servo llegue a la posicion objetivo
      * @param servo Servo number (0 hasta 15)
      */
-    //% blockId="waitServo" block="espera por el servo %servo"
+    //% blockId="waitServo" block="espera por el servo %Servo"
     //% weight=5
     //% subcategory=Servo
-    export function waitServo(servo: number): void{
-        while (servoActual[servo] != servoTarget[servo]) { basic.pause(10); } //intentar no utilizar demasiado esta función
+    export function waitServo(Servo: number): void{
+        while (servoActual[Servo] != servoTarget[Servo]) { basic.pause(10); } //intentar no utilizar demasiado esta función
     }
 }
