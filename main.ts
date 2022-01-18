@@ -36,7 +36,7 @@ namespace JoviBit {
         pins.digitalWritePin(pin, 0)
         control.waitMicros(10)
         pins.digitalWritePin(pin, 0)
-
+        
         // read pulse
         let d = pins.pulseIn(pin, PulseValue.High, 25000)
         let distancia = d / 29 / 2
