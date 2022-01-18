@@ -15,37 +15,6 @@ enum Unitat_Distancia {
     Unitat_Distancia_inch,
 }
 
-enum Servo{
-    //% block="A" enumval = 0
-
-    P0,
-
-    //% block="B" enumval = 1
-
-    P1,
-
-    //% block="C" enumval = 2
-
-    P2,
-    
-    //% block="D" enumval = 8
-
-    P8,
-
-    //% block="E" enumval = 13
-
-    P13,
-
-    //% block="F" enumval = 14
-
-    P14,
-
-    //% block="G" enumval = 15
-
-    P15,
-}
-
-
 /**
 * Custom blocks
 */
@@ -164,20 +133,20 @@ namespace JoviBit {
 
     /**
      * establece la posición del servo
-     * @param servo Servo numero(0 to 15)
-     * @param angle degrees to turn servo(-90 to +90)
+     * @param servo Servo numero(0 to 15) eg: 0
+     * @param angle degrees to turn servo(-90 to +90) eg: 0
      */
     //% blockId="setServo" block="Establece el servo %Servo| al angulo %angle"
     //% weight=70
     //% angle.min=-90 angle.max=+90
     //% subcategory=Servo
-    export function setServo(servo: Servo, angle:number):void{
+    export function setServo(servo: number, angle:number):void{
 
         setServoRaw(servo, angle);
         servoTarget[servo] = angle;
     }
 
-    function setServoRaw(servo: Servo, angle: number): void{
+    function setServoRaw(servo: number, angle: number): void{
 
         if(initI2C == false){
             initPCA();
@@ -210,7 +179,7 @@ namespace JoviBit {
     //% angle.min=-90 angle.max=90
     //% speed.min=1 speed.max=1000
     //% subcategory=Servo
-    export function moverServo(servo: Servo, angle: number, speed:number): void{
+    export function moverServo(servo: number, angle: number, speed:number): void{
         let step = 1;
         let delay = 10; 
         if (servoTarget[servo] != servoActual[servo])
@@ -248,7 +217,7 @@ namespace JoviBit {
     //% blockId="getServoActual" block="servo %Servo| actual position"
     //% weight=10
     //% subcategory=Servo
-    export function getServoActual(servo: Servo): number{
+    export function getServoActual(servo: number): number{
         return servoActual[servo];
     }
 
@@ -259,7 +228,7 @@ namespace JoviBit {
     //% blockId="getServoTarget" block="servo %Servo| posición objetivo"
     //% weight=5
     //% subcategory=Servo
-    export function getServoTarget(servo: Servo): number{
+    export function getServoTarget(servo: number): number{
         return servoTarget[servo];
     }
 
@@ -270,7 +239,7 @@ namespace JoviBit {
     //% blockId="isServoDone" block="servo %Servo| ha terminado"
     //% weight=5
     //% subcategory=Servo
-    export function isServoDone(servo: Servo): boolean{
+    export function isServoDone(servo: number): boolean{
         return servoTarget[servo]==servoActual[servo];
     }
 
@@ -281,7 +250,7 @@ namespace JoviBit {
     //% blockId="waitServo" block="espera por el servo %Servo"
     //% weight=5
     //% subcategory=Servo
-    export function waitServo(servo: Servo): void{
+    export function waitServo(servo: number): void{
         while (servoActual[servo] != servoTarget[servo]) { basic.pause(10); } //intentar no utilizar demasiado esta función
     }
 }
