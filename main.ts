@@ -18,31 +18,31 @@ enum Unitat_Distancia {
 enum Servo{
     //% block="A" enumval = 0
 
-    P0,
+    P0 = 0,
 
     //% block="B" enumval = 1
 
-    P1,
+    P1 = 1,
 
     //% block="C" enumval = 2
 
-    P2,
+    P2 = 2,
     
     //% block="D" enumval = 8
 
-    P8,
+    P8 = 8,
 
     //% block="E" enumval = 13
 
-    P13,
+    P13 = 13,
 
     //% block="F" enumval = 14
 
-    P14,
+    P14 = 14,
 
     //% block="G" enumval = 15
 
-    P15,
+    P15 = 15,
 }
 
 
