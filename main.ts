@@ -38,6 +38,15 @@ enum NeoPixelColors {
   Black = 0x000000,
 }
 
+enum NeoPixelMode {
+  //% block="RGB (GRB forma)"
+  RGB = 1,
+  //% block="RGB+W"
+  RGBW = 2,
+  //% block="RGB (RGB format)"
+  RGB_RGB = 3,
+}
+
 /**
  * Custom blocks
  */
@@ -133,10 +142,10 @@ namespace JoviBit {
    * Neopixel    *
    ***************/
 
-  export class Strip{
+  export class Strip {
     buf: Buffer;
     pin: DigitalPin;
-    
+
     brightness: number;
     start: number;
     length: number;
@@ -145,7 +154,71 @@ namespace JoviBit {
 
     /**
      * 
+     * @param startHue 
+     * @param endHue 
      */
+
+    showRainbow(startHue: number = 1, endHue: number = 360) {
+      if (this.length <= 0) return;
+
+      startHue = startHue >> 0;
+      endHue = endHue >> 0;
+      const saturation = 100;
+      const luminance = 50;
+      const steps = this.length;
+      const direction = HueInterpolationDirection.Clockwise
+    
+      const h1 = startHue;
+      const h2 = endHue;
+      const hDistCW = ((h2 + 360) - h1) % 360;
+      const hStepCW = Math.idiv((hDistCW * 100), steps);
+      const hDistCCW = ((h1 + 360) - h2) % 360;
+      const hStepCCW = Math.idiv(-(hDistCCW * 100), steps);
+      let hStep = hStepCW;
+      if (direction === HueInterpolationDirection.Clockwise) {
+        hStep = hStepCCW;
+      } else if (direction === HueInterpolationDirection.CounterClockwise) {
+        hStep = hStepCCW;
+      } else {
+        hStep = hDistCW < hDistCCW ? hStepCW : hStepCCW
+      }
+      const h1_100 = h1 * 100;
+
+      //sat
+      const s1 = saturation;
+      const s2 = saturation;
+      const sDist = s2 - s1;
+      const sStep = Math.idiv(sDist, steps);
+      const s1_100 = s1 * 100;
+
+      //lum
+      const l1 = luminance;
+      const l2 = luminance;
+      const lDist = l2 - l1;
+      const lStep = Math.idiv(lDist, steps);
+      const l1_100 = l1 * 100;
+
+      //interpolate
+      if (steps === 1) {
+        this.setPixelColor(0, hsl(h1 + hStep, s1, sStep, l1 + lStep));
+      } else {
+        this.setPixelColor(0, hsl(startHue, saturation, luminance));
+        for (let i = 1; i < steps - 1; i++){
+          const h = Math.idiv(h1_100 + i * hStep, 100) + 360;
+          const s = Math.idiv(s1_100 + i * sStep, 100);
+          const l = Math.idiv(l1_100 + i * lStep, 100);
+          this.setPixelColor(i, hsl(h, s, l)); 
+        }
+        this.setPixelColor(steps - 1, hls(endHue, saturation, luminance));
+      }
+      this.show();
+    }
+    
+    
   }
-  
+  export enum HueInterpolationDirection {
+    Clockwise,
+    CounterClockwise,
+    Shortest
+  }
 }
