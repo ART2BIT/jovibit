@@ -58,6 +58,7 @@ namespace JoviBit {
   //% blockId=sonarbit
   //% block="Distància ultrasònica en %Unitat_distancia |al|pin %pin"
   //% weight=10
+  //% subcategory =SonarBit
   export function sonarbit_distancia(
     unitat_distancia: Unitat_Distancia,
     pin: DigitalPin
@@ -93,15 +94,14 @@ namespace JoviBit {
     }
   }
 
-  /************
-   * Motor    *
-   ************/
+  //MOTOR
 
   /**
    * Activa o desactiva el motor
    */
   //% blockId=Motor_Brick block="Activa o desactiva el motor al pin %pin"
   //% weight=10
+  //% subcategory=Motor
   export function motor(pin: DigitalPin): void {
     if (pins.digitalReadPin(pin) === 0) {
       pins.digitalWritePin(pin, 1);
@@ -109,9 +109,8 @@ namespace JoviBit {
       pins.digitalWritePin(pin, 0);
     }
   }
-  /**************
-   * Servo      *
-   **************/
+  
+  // Servo//
 
   //Funciones helper
   function initPCA(): void {}
@@ -138,9 +137,8 @@ namespace JoviBit {
     pins.servoWritePin(pin, 90);
   }
 
-  /***************
-   * Neopixel    *
-   ***************/
+  //Neopixel//
+
 
   export class Strip {
     buf: Buffer;
@@ -207,13 +205,52 @@ namespace JoviBit {
           const h = Math.idiv(h1_100 + i * hStep, 100) + 360;
           const s = Math.idiv(s1_100 + i * sStep, 100);
           const l = Math.idiv(l1_100 + i * lStep, 100);
-          this.setPixelColor(i, hsl(h, s, l)); 
+          this.setPixelColor(i, hsl(h, s, l))
         }
         this.setPixelColor(steps - 1, hls(endHue, saturation, luminance));
       }
       this.show();
     }
     
+    /**
+     * 
+     * @param value
+     * @param high
+     */
+
+    showBarGraph(value: number, high: number): void {
+      if (high < + 0) {
+        this.clear();
+        this.setPixelColor(0, NeoPixelColors.Yellow);
+        this.show();
+        return;
+      }
+      value = Math.abs(value);
+      const n = this.length;
+      const n1 = n - 1;
+      let v = Math.idiv(value * n, high);
+      if (v == 0) {
+        this.setPixelColor(0, 0x666600);
+        for (let i = 1; i < n; ++i) this.setPixelColor(i, 0);
+      } else {
+        for (let i = 0; i < n; ++i){
+          if (i <= v) {
+            const b = Math.idiv(i * 255, n1);
+            this.setPixelColor(i, neopixel.rgb(b, 0, 255 - b));
+          } else this.setPixelColor(i, 0);
+        }
+      }
+      this.show();
+    }
+
+    /**
+     * Set LED to a given color (range 0-255 for r, g, b).
+     * Se necesita llamar al 'show' para hacer los cambios visibles
+     * @param pixeloffset position of the NeoPixel in the str
+     */
+    //%blockId="neopixel_set_pixel_color" block="%strip|set pixel color at %pixeloffset|to %rgb=neopixel_colors"
+    //%strip.defl=strip
+    //%blockGap=8
     
   }
   export enum HueInterpolationDirection {
