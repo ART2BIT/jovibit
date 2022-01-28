@@ -5,7 +5,7 @@
         "radio": "*",
         "microphone": "*",
         "servo": "*",
-        "neopixel": "github:microsoft/pxt-neopixel#master"
+        "ws2812b": "github:microsoft/pxt-ws2812b#v0.1.1"
     },
     "files": [
         "main.ts",
@@ -15,7 +15,7 @@
         "test.ts"
     ],
     "targetVersions": {
-        "target": "4.0.16",
+        "target": "4.0.17",
         "targetId": "microbit"
     },
     "supportedTargets": [
