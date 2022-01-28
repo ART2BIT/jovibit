@@ -16,25 +16,25 @@ enum Unitat_Distancia {
 }
 
 enum NeoPixelColors {
-  //% block=red
+  //% block=vermell
   Red = 0xff0000,
-  //% block=orange
+  //% block=taronja
   Orange = 0xffa500,
-  //% block=yellow
+  //% block=groc
   Yellow = 0xffff00,
-  //% block=green
+  //% block=verd
   Green = 0x00ff00,
-  //% block=blue
+  //% block=blau
   Blue = 0x0000ff,
-  //% block=indigo
+  //% block=indi
   Indigo = 0x4b0082,
-  //% block=violet
+  //% block=violat
   Violet = 0x8a2be2,
-  //% block=purple
+  //% block=porpra
   Purple = 0xff00ff,
-  //% block=white
+  //% block=blanc
   White = 0xffffff,
-  //% block=black
+  //% block=negre
   Black = 0x000000,
 }
 
