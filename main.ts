@@ -324,7 +324,7 @@ namespace JoviBit {
     //% blockId="neopixel_show" block="%strip|show" blockGap=8
     //% strip.defl=strip
     //% weight 79
-    //% parts="neopixel"
+    //% subcategory=Neopixel
     show() {
       ws2812b.sendBuffer(this.buf, this.pin);
     }
@@ -526,22 +526,18 @@ namespace JoviBit {
   //% blockId="neopixel_create" block="NeoPixel en %mode"
   //% wight=90 blockGap=8
   //% trackArgs=0,2
-  //% blockSetVasriable=strip
+  //% blockSetVariable=strip
   //% subcategory=Neopixel
-  export function create(
-    pin: DigitalPin = DigitalPin.P16,
-    numleds: number = 0,
-    mode: NeoPixelMode
-  ): Strip {
+  export function create(mode: NeoPixelMode): Strip {
     let strip = new Strip();
     let stride = mode === NeoPixelMode.RGBW ? 4 : 3;
-    strip.buf = pins.createBuffer(numleds * stride);
+    strip.buf = pins.createBuffer(0 * stride);
     strip.start = 0;
-    strip._length = numleds;
+    strip._length = 0;
     strip.mode = mode || NeoPixelMode.RGB;
     strip.matrixWidth = 0;
     strip.setBrightness(128);
-    strip.setPin(pin);
+    strip.setPin(DigitalPin.P16);
     return strip;
   }
 
