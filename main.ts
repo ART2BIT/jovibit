@@ -56,7 +56,7 @@ namespace JoviBit {
    * obtiene la la distancia ultrasónica.
    */
   //% blockId=sonarbit
-  //% block="Distància ultrasònica en %Unitat_distancia |al|pin %pin"
+  //% block="Distància ultrasónica en %Unitat_distancia |al|pin %pin"
   //% weight=10
   //% subcategory=SonarBit
   export function sonarbit_distancia(
@@ -120,8 +120,8 @@ namespace JoviBit {
    * @param pin servo en el pin(A al G) eg:0
    * @param vel
    */
-  //%blockId="MoverServo"
-  //%block="Mueve el servo %pin| a la velocidad %vel"
+  //% blockId="MoverServo"
+  //% block="Mueve el servo %pin| a la velocidad %vel"
   //% subcategory=Servo
   export function moverServo(pin: AnalogPin, vel: number): void {
     pins.servoWritePin(pin, vel);
@@ -227,12 +227,6 @@ namespace JoviBit {
       this.show();
     }
 
-    /**
-     *
-     * @param value
-     * @param high
-     */
-
     private showBarGraph(value: number, high: number): void {
       if (high < +0) {
         this.clear();
@@ -327,6 +321,10 @@ namespace JoviBit {
     /**
      * Envía todos los cambios al strip.
      */
+    //% blockId="neopixel_show" block="%strip|show" blockGap=8
+    //% strip.defl=strip
+    //% weight 79
+    //% parts="neopixel"
     show() {
       ws2812b.sendBuffer(this.buf, this.pin);
     }
@@ -367,9 +365,9 @@ namespace JoviBit {
     }
 
     /**
-     * crea una dimensió de LEDs
-     * @param start offset in the strip to start the range
-     * @param _length number of LEDs in the range
+     * crea una dimensión de LEDs
+     * @param start punto de partida de la dimensión
+     * @param _length numero de LEDs que tiene la dimensión
      */
     //% weight=89
     //% blockId="neopixel_range" block="%strip|rango desde %start|con %_length|leds"
@@ -395,7 +393,7 @@ namespace JoviBit {
     }
 
     /**
-     * Apaga el LED
+     * Mueve el hacia delante
      * @param offset number of pixels to shift forward, eg: 1
      */
     //% blockId="neopixel_shift" block="%strip|shift pixels by %offset" blockGap8
@@ -413,7 +411,7 @@ namespace JoviBit {
     }
 
     /**
-     * Estableix la posició del led.
+     * Establece la posición del led.
      */
     //% weight=10
     //% subcategory=Neopixel
@@ -525,14 +523,14 @@ namespace JoviBit {
    * @param pin the pin where the neopixel is connected.
    * @param numleds number of leds in the strip, eg: 24,30,60,64
    */
-  //% blockId="neopixel_create" block="NeoPixel en el pin %pin|con %numleds|leds como %mode"
+  //% blockId="neopixel_create" block="NeoPixel en %mode"
   //% wight=90 blockGap=8
   //% trackArgs=0,2
   //% blockSetVasriable=strip
   //% subcategory=Neopixel
   export function create(
-    pin: DigitalPin,
-    numleds: number,
+    pin: DigitalPin = DigitalPin.P16,
+    numleds: number = 0,
     mode: NeoPixelMode
   ): Strip {
     let strip = new Strip();
@@ -548,7 +546,7 @@ namespace JoviBit {
   }
 
   /**
-   * Convierte los canales red, green, blue en colo RGB
+   * Convierte los canales red, green, blue en color RGB
    * @param red
    * @param green
    * @param blue
