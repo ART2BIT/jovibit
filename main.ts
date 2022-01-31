@@ -16,23 +16,23 @@ enum Unitat_Distancia {
 }
 
 enum NeoPixelColors {
-  //% block=vermell
+  //% block=rojo
   Red = 0xff0000,
-  //% block=taronja
+  //% block=naranja
   Orange = 0xffa500,
-  //% block=groc
+  //% block=amarillo
   Yellow = 0xffff00,
-  //% block=verd
+  //% block=verde
   Green = 0x00ff00,
-  //% block=blau
+  //% block=azul
   Blue = 0x0000ff,
-  //% block=indi
+  //% block=indigo
   Indigo = 0x4b0082,
-  //% block=violat
+  //% block=violeta
   Violet = 0x8a2be2,
-  //% block=porpra
+  //% block=purpura
   Purple = 0xff00ff,
-  //% block=blanc
+  //% block=blanco
   White = 0xffffff,
   //% block=negre
   Black = 0x000000,
@@ -150,14 +150,13 @@ namespace JoviBit {
     matrixWidth: number;
 
     /**
-     * Enciende el LED
-     * @param rgb RGB color del LED
+     * Enciende el LED con el color elegido
      */
     //% blockId="neopixel_set_strip_color" block="%strip|muestra el color %rgb=neopixel_colors"
     //% strip.defl=strip
     //% weight=85 blockGap=8
     //% subcategory=Neopixel
-    showColor(rgb: number) {
+    showColor(rgb: NeoPixelColors) {
       rgb = rgb >> 0;
       this.setALLRGB(rgb);
       this.show();
