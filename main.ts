@@ -58,7 +58,7 @@ namespace JoviBit {
   //% blockId=sonarbit
   //% block="Distància ultrasònica en %Unitat_distancia |al|pin %pin"
   //% weight=10
-  //% subcategory =SonarBit
+  //% subcategory=SonarBit
   export function sonarbit_distancia(
     unitat_distancia: Unitat_Distancia,
     pin: DigitalPin
@@ -240,6 +240,7 @@ namespace JoviBit {
         this.show();
         return;
       }
+
       value = Math.abs(value);
       const n = this._length;
       const n1 = n - 1;
@@ -375,7 +376,7 @@ namespace JoviBit {
     //% strip.defl=strip
     //% blockSetVariable=range
     //% subcategory=Neopixel
-    range(start: number, _length: number): strip {
+    range(start: number, _length: number): Strip {
       start = start >> 0;
       _length = _length >> 0;
       let strip = new Strip();
@@ -439,7 +440,7 @@ namespace JoviBit {
         }
       }
       return (
-        Math.idiv(this._length() * 7, 10) + // 0.7mA por neopixel
+        Math.idiv(this.length() * 7, 10) + // 0.7mA por neopixel
         Math.idiv(p * 480, 10000)
       ); //rought approximation
     }
