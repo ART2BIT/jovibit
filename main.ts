@@ -3,6 +3,18 @@
  * Read more at https://makecode.microbit.org/blocks/custom
  */
 
+import { pinsHelper } from './pxt_modules/pinsHelper';
+
+enum Unitat_Distancia {
+  //% block="mm" enumval=0
+  Unitat_Distancia_mm,
+
+  //% block="cm" enumval=1
+  Unitat_Distancia_cm,
+
+  //% block="polzada" enumval=2
+  Unitat_Distancia_inch,
+}
 enum Pin {
   //% block="A"
   P0 = 0,
@@ -24,17 +36,6 @@ enum Pin {
 
   //% block="G"
   P15 = 15,
-}
-
-enum Unitat_Distancia {
-  //% block="mm" enumval=0
-  Unitat_Distancia_mm,
-
-  //% block="cm" enumval=1
-  Unitat_Distancia_cm,
-
-  //% block="polzada" enumval=2
-  Unitat_Distancia_inch,
 }
 
 enum NeoPixelColors {
@@ -83,7 +84,7 @@ namespace JoviBit {
   //% subcategory=SonarBit
   export function sonarbit_distancia(
     unitat_distancia: Unitat_Distancia,
-    pin: Pin
+    pin: pinsHelper.Pin
   ): number {
     // send pulse
     let truePin: DigitalPin = pinsHelper.pinToDigitalPin(pin);
