@@ -332,7 +332,7 @@ namespace JoviBit {
      * apagar los LEDs.
      * se tiene que llamar 'show' para hacer visible los cambios
      */
-    //% blockId= "neopixel_clear" block"%strip|clear"
+    //% blockId= "neopixel_clear" block"clear"
     //% strip.defl=strip
     //% weight=76
     //% subcategory=Neopixel
@@ -414,7 +414,7 @@ namespace JoviBit {
      */
     //% weight=10
     //% subcategory=Neopixel
-    setPin(pin: DigitalPin = DigitalPin.P16): void {
+    setPin(pin: DigitalPin = DigitalPin.P18): void {
       this.pin = pin;
       pins.digitalWritePin(this.pin, 0);
       // don't yield to avoid races on initialization
@@ -530,9 +530,9 @@ namespace JoviBit {
   export function create(mode: NeoPixelMode): Strip {
     let strip = new Strip();
     let stride = mode === NeoPixelMode.RGBW ? 4 : 3;
-    strip.buf = pins.createBuffer(0 * stride);
+    strip.buf = pins.createBuffer(1 * stride);
     strip.start = 0;
-    strip._length = 0;
+    strip._length = 1;
     strip.mode = mode || NeoPixelMode.RGB;
     strip.matrixWidth = 0;
     strip.setBrightness(128);
