@@ -414,7 +414,7 @@ namespace JoviBit {
      */
     //% weight=10
     //% subcategory=Neopixel
-    setPin(pin: DigitalPin = DigitalPin.P18): void {
+    setPin(pin: DigitalPin = DigitalPin.P16): void {
       this.pin = pin;
       pins.digitalWritePin(this.pin, 0);
       // don't yield to avoid races on initialization
