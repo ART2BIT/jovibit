@@ -3,9 +3,33 @@
  * Read more at https://makecode.microbit.org/blocks/custom
  */
 
-enum Unitat_Distancia {
-  //% block="mm" enumval=0
+interface Pin{
+  //% block="A"
+  P0: DigitalPin.P0,
+  
+  //% block="B"
+  P1: DigitalPin.P1,
+  
+  //% block="C"
+  P2 : DigitalPin.P2,
 
+  //% block="D"
+  P8 : DigitalPin.P8,
+
+  //% block="E"
+  P13 : DigitalPin.P13,
+
+  //% block="F"
+  P14 : DigitalPin.P14,
+
+  //% block="G"
+  P15 : DigitalPin.P15
+}
+type Pinn = Pin | DigitalPin 
+
+enum Unitat_Distancia {
+  
+  //% block="mm" enumval=0
   Unitat_Distancia_mm,
 
   //% block="cm" enumval=1
@@ -56,7 +80,7 @@ namespace JoviBit {
    * obtiene la la distancia ultrasónica.
    */
   //% blockId=sonarbit
-  //% block="Distància ultrasónica en %Unitat_distancia |al|pin %pin"
+  //% block="Distancia ultrasónica en %Unitat_distancia |al|pin %Pin"
   //% weight=10
   //% subcategory=SonarBit
   export function sonarbit_distancia(
@@ -99,7 +123,7 @@ namespace JoviBit {
   /**
    * Activa o desactiva el motor
    */
-  //% blockId=Motor_Brick block="Activa o desactiva el motor en el pin %pin"
+  //% blockId=Motor_Brick block="Activa o desactiva el motor en el pin %Pin"
   //% weight=10
   //% subcategory=Motor
   export function motor(pin: DigitalPin): void {
@@ -171,59 +195,27 @@ namespace JoviBit {
     //% weight=85 blockGap=8
     //% subcategory=Neopixel
     showRainbow(startHue: number = 1, endHue: number = 360) {
-      if (this._length <= 0) return;
-
-      startHue = startHue >> 0;
-      endHue = endHue >> 0;
-      const saturation = 100;
-      const luminance = 50;
-      const steps = this._length;
-      const direction = HueInterpolationDirection.Clockwise;
-
-      const h1 = startHue;
-      const h2 = endHue;
-      const hDistCW = (h2 + 360 - h1) % 360;
-      const hStepCW = Math.idiv(hDistCW * 100, steps);
-      const hDistCCW = (h1 + 360 - h2) % 360;
-      const hStepCCW = Math.idiv(-(hDistCCW * 100), steps);
-      let hStep = hStepCW;
-      if (direction === HueInterpolationDirection.Clockwise) {
-        hStep = hStepCCW;
-      } else if (direction === HueInterpolationDirection.CounterClockwise) {
-        hStep = hStepCCW;
-      } else {
-        hStep = hDistCW < hDistCCW ? hStepCW : hStepCCW;
-      }
-      const h1_100 = h1 * 100;
-
-      //sat
-      const s1 = saturation;
-      const s2 = saturation;
-      const sDist = s2 - s1;
-      const sStep = Math.idiv(sDist, steps);
-      const s1_100 = s1 * 100;
-
-      //lum
-      const l1 = luminance;
-      const l2 = luminance;
-      const lDist = l2 - l1;
-      const lStep = Math.idiv(lDist, steps);
-      const l1_100 = l1 * 100;
-
-      //interpolate
-      if (steps === 1) {
-        this.setPixelColor(0, hsl(h1 + hStep, s1 + sStep, l1 + lStep));
-      } else {
-        this.setPixelColor(0, hsl(startHue, saturation, luminance));
-        for (let i = 1; i < steps - 1; i++) {
-          const h = Math.idiv(h1_100 + i * hStep, 100) + 360;
-          const s = Math.idiv(s1_100 + i * sStep, 100);
-          const l = Math.idiv(l1_100 + i * lStep, 100);
-          this.setPixelColor(i, hsl(h, s, l));
-        }
-        this.setPixelColor(steps - 1, hsl(endHue, saturation, luminance));
-      }
+      this.setPixelColor(0, NeoPixelColors.Violet)
       this.show();
+      basic.pause(1000);
+      this.setPixelColor(0, NeoPixelColors.Indigo)
+      this.show();
+      basic.pause(1000);
+      this.setPixelColor(0, NeoPixelColors.Blue)
+      this.show();
+      basic.pause(1000)
+      this.setPixelColor(0, NeoPixelColors.Green)
+      this.show();
+      basic.pause(1000)
+      this.setPixelColor(0, NeoPixelColors.Yellow)
+      this.show();
+      basic.pause(1000)
+      this.setPixelColor(0, NeoPixelColors.Orange)
+      this.show();
+      basic.pause(1000)
+      this.setPixelColor(0, NeoPixelColors.Red)
+      this.show();
+      basic.pause(1000)
     }
 
     private showBarGraph(value: number, high: number): void {
@@ -343,7 +335,7 @@ namespace JoviBit {
     /**
      * obtiene el número de píxeles declarados en la cinta
      */
-    //% blockId="neopixel__length" block="%strip|_length" blockGap=8
+    //% blockId="neopixel__length" block="Tamaño de %strip" blockGap=8
     //% strip.defl=strip
     //% weight=60
     //% subcategory=Neopixel
@@ -414,7 +406,7 @@ namespace JoviBit {
      */
     //% weight=10
     //% subcategory=Neopixel
-    setPin(pin: DigitalPin = DigitalPin.P18): void {
+    setPin(pin: DigitalPin = DigitalPin.P16): void {
       this.pin = pin;
       pins.digitalWritePin(this.pin, 0);
       // don't yield to avoid races on initialization
@@ -426,7 +418,7 @@ namespace JoviBit {
     //% wight=9 blockId=neopixel_power block="%strip|power (mA)"
     //% strip.defl=strip
     //% subcategory=Neopixel
-    power(): number {
+    /*power(): number {
       const stride = this.mode === NeoPixelMode.RGBW ? 4 : 3;
       const end = this.start + this._length;
       let p = 0;
@@ -440,7 +432,7 @@ namespace JoviBit {
         Math.idiv(this.length() * 7, 10) + // 0.7mA por neopixel
         Math.idiv(p * 480, 10000)
       ); //rought approximation
-    }
+    }*/
 
     private setBufferRGB(
       offset: number,
