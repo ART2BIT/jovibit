@@ -3,32 +3,30 @@
  * Read more at https://makecode.microbit.org/blocks/custom
  */
 
-interface Pin{
+enum Pin {
   //% block="A"
-  P0: DigitalPin.P0,
-  
+  P0 = 0,
+
   //% block="B"
-  P1: DigitalPin.P1,
-  
+  P1 = 1,
+
   //% block="C"
-  P2 : DigitalPin.P2,
+  P2 = 2,
 
   //% block="D"
-  P8 : DigitalPin.P8,
+  P8 = 8,
 
   //% block="E"
-  P13 : DigitalPin.P13,
+  P13 = 13,
 
   //% block="F"
-  P14 : DigitalPin.P14,
+  P14 = 14,
 
   //% block="G"
-  P15 : DigitalPin.P15
+  P15 = 15,
 }
-type Pinn = Pin | DigitalPin 
 
 enum Unitat_Distancia {
-  
   //% block="mm" enumval=0
   Unitat_Distancia_mm,
 
@@ -85,18 +83,19 @@ namespace JoviBit {
   //% subcategory=SonarBit
   export function sonarbit_distancia(
     unitat_distancia: Unitat_Distancia,
-    pin: DigitalPin
+    pin: Pin
   ): number {
     // send pulse
-    pins.setPull(pin, PinPullMode.PullNone);
-    pins.digitalWritePin(pin, 0);
+    let truePin: DigitalPin = pinsHelper.pinToDigitalPin(pin);
+    pins.setPull(truePin, PinPullMode.PullNone);
+    pins.digitalWritePin(truePin, 0);
     control.waitMicros(2);
-    pins.digitalWritePin(pin, 0);
+    pins.digitalWritePin(truePin, 0);
     control.waitMicros(10);
-    pins.digitalWritePin(pin, 0);
+    pins.digitalWritePin(truePin, 0);
 
     // read pulse
-    let d = pins.pulseIn(pin, PulseValue.High, 25000);
+    let d = pins.pulseIn(truePin, PulseValue.High, 25000);
     let distancia = d / 29 / 2;
 
     if (distancia > 400) {
@@ -126,11 +125,12 @@ namespace JoviBit {
   //% blockId=Motor_Brick block="Activa o desactiva el motor en el pin %Pin"
   //% weight=10
   //% subcategory=Motor
-  export function motor(pin: DigitalPin): void {
-    if (pins.digitalReadPin(pin) === 0) {
-      pins.digitalWritePin(pin, 1);
+  export function motor(pin: Pin): void {
+    let truePin: DigitalPin = pinsHelper.pinToDigitalPin(pin);
+    if (pins.digitalReadPin(truePin) === 0) {
+      pins.digitalWritePin(truePin, 1);
     } else {
-      pins.digitalWritePin(pin, 0);
+      pins.digitalWritePin(truePin, 0);
     }
   }
 
@@ -147,8 +147,8 @@ namespace JoviBit {
   //% blockId="MoverServo"
   //% block="Mueve el servo %pin| a la velocidad %vel"
   //% subcategory=Servo
-  export function moverServo(pin: AnalogPin, vel: number): void {
-    pins.servoWritePin(pin, vel);
+  export function moverServo(pin: Pin, vel: number): void {
+    pins.servoWritePin(pinsHelper.pinToAnalogPin(pin), vel);
   }
   /**
    * Detiene el servo
@@ -157,8 +157,8 @@ namespace JoviBit {
   //% blockId="PararServo"
   //% block="Para el servo %pin"
   //% subcategory=Servo
-  export function pararServo(pin: AnalogPin): void {
-    pins.servoWritePin(pin, 90);
+  export function pararServo(pin: Pin): void {
+    pins.servoWritePin(pinsHelper.pinToAnalogPin(pin), 90);
   }
 
   //Neopixel//
@@ -195,27 +195,27 @@ namespace JoviBit {
     //% weight=85 blockGap=8
     //% subcategory=Neopixel
     showRainbow(startHue: number = 1, endHue: number = 360) {
-      this.setPixelColor(0, NeoPixelColors.Violet)
+      this.setPixelColor(0, NeoPixelColors.Violet);
       this.show();
       basic.pause(1000);
-      this.setPixelColor(0, NeoPixelColors.Indigo)
+      this.setPixelColor(0, NeoPixelColors.Indigo);
       this.show();
       basic.pause(1000);
-      this.setPixelColor(0, NeoPixelColors.Blue)
+      this.setPixelColor(0, NeoPixelColors.Blue);
       this.show();
-      basic.pause(1000)
-      this.setPixelColor(0, NeoPixelColors.Green)
+      basic.pause(1000);
+      this.setPixelColor(0, NeoPixelColors.Green);
       this.show();
-      basic.pause(1000)
-      this.setPixelColor(0, NeoPixelColors.Yellow)
+      basic.pause(1000);
+      this.setPixelColor(0, NeoPixelColors.Yellow);
       this.show();
-      basic.pause(1000)
-      this.setPixelColor(0, NeoPixelColors.Orange)
+      basic.pause(1000);
+      this.setPixelColor(0, NeoPixelColors.Orange);
       this.show();
-      basic.pause(1000)
-      this.setPixelColor(0, NeoPixelColors.Red)
+      basic.pause(1000);
+      this.setPixelColor(0, NeoPixelColors.Red);
       this.show();
-      basic.pause(1000)
+      basic.pause(1000);
     }
 
     private showBarGraph(value: number, high: number): void {
@@ -634,4 +634,9 @@ namespace JoviBit {
     CounterClockwise,
     Shortest,
   }
+  /**
+   *
+   * @param pin
+   * @returns
+   */
 }
