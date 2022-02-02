@@ -5,7 +5,8 @@
         "radio": "*",
         "microphone": "*",
         "servo": "*",
-        "ws2812b": "github:microsoft/pxt-ws2812b#v0.1.1"
+        "ws2812b": "github:microsoft/pxt-ws2812b#v0.1.1",
+        "pin driver": "github:werente/pin-driver#cdd987ac8b38c6632cde0d01534920e343a841c5"
     },
     "files": [
         "main.ts",
