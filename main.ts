@@ -243,13 +243,13 @@ namespace JoviBit {
       this.show();
     }
 
-    /*/**
+    /**
      * Set LED to a given color (range 0-255 for r, g, b).
      * Se necesita llamar al 'show' para hacer los cambios visibles
      * @param pixeloffset position of the NeoPixel in the strip
      * @param rgb RGB color del LED
      *
-     *
+     */
     //% blockId="neopixel_set_pixel_color" block="%strip|Establece pixel color en %pixeloffset|a %rgb=neopixel_colors"
     //% strip.defl=strip
     //% blockGap=8
@@ -257,7 +257,7 @@ namespace JoviBit {
     //% subcategory=Neopixel
     setPixelColor(pixeloffset: number, rgb: number): void {
       this.setPixelRGB(pixeloffset >> 0, rgb >> 0);
-    }*/
+    }
 
     /**
      * Establece el número de píxeles en la matriz de strip
