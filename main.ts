@@ -287,7 +287,7 @@ namespace JoviBit {
      * apagar los LEDs.
      * se tiene que llamar 'show' para hacer visible los cambios
      */
-    //% blockId= "neopixel_clear" block"clear"
+    //% blockId= "neopixel_clear" block"%clear"
     //% strip.defl=strip
     //% weight=76
     //% subcategory=Neopixel
@@ -464,7 +464,7 @@ namespace JoviBit {
    *
    */
   //% weight=2 blockGap=8
-  //% blockId="neopixel_colors" block="devuelve el valor del color %NeoPixelColors"
+  //% blockId="neopixel_colors" block="devuelve el valor del color %color"
   //% subcategory=Neopixel
   export function colors(color: NeoPixelColors): number {
     return color;
