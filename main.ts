@@ -287,7 +287,7 @@ namespace JoviBit {
      * apagar los LEDs.
      * se tiene que llamar 'show' para hacer visible los cambios
      */
-    //% blockId= "neopixel_clear" block"%clear"
+    //% blockId= "neopixel_clear" block"%strip|clear" blockGap=8
     //% strip.defl=strip
     //% weight=76
     //% subcategory=Neopixel
