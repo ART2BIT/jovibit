@@ -194,25 +194,25 @@ namespace JoviBit {
     //% weight=85 blockGap=8
     //% subcategory=Neopixel
     showRainbow(startHue: number = 1, endHue: number = 360) {
-      this.setPixelColor(0, NeoPixelColors.Violet);
+      this.setPixelColor(startHue, NeoPixelColors.Violet);
       this.show();
       basic.pause(1000);
-      this.setPixelColor(0, NeoPixelColors.Indigo);
+        this.setPixelColor(startHue, NeoPixelColors.Indigo);
       this.show();
       basic.pause(1000);
-      this.setPixelColor(0, NeoPixelColors.Blue);
+        this.setPixelColor(startHue, NeoPixelColors.Blue);
       this.show();
       basic.pause(1000);
-      this.setPixelColor(0, NeoPixelColors.Green);
+        this.setPixelColor(startHue, NeoPixelColors.Green);
       this.show();
       basic.pause(1000);
-      this.setPixelColor(0, NeoPixelColors.Yellow);
+        this.setPixelColor(startHue, NeoPixelColors.Yellow);
       this.show();
       basic.pause(1000);
-      this.setPixelColor(0, NeoPixelColors.Orange);
+        this.setPixelColor(startHue, NeoPixelColors.Orange);
       this.show();
       basic.pause(1000);
-      this.setPixelColor(0, NeoPixelColors.Red);
+        this.setPixelColor(startHue, NeoPixelColors.Red);
       this.show();
       basic.pause(1000);
     }
@@ -277,20 +277,20 @@ namespace JoviBit {
      */
     //% blockId="neopixel_show" block="%strip|show" blockGap=8
     //% strip.defl=strip
-    //% weight 79
+    //% weight=79
     //% subcategory=Neopixel
     show() {
       ws2812b.sendBuffer(this.buf, this.pin);
     }
 
     /**
-     * apagar los LEDs.
+     * apaga los LEDs.
      * se tiene que llamar 'show' para hacer visible los cambios
      */
-    //% blockId= "neopixel_clear" block"%strip|clear" blockGap=8
+    //% blockId="neopixel_clear" block="%strip| apaga" blockGap=8
     //% strip.defl=strip
-    //% weight=76
-    //% subcategory=Neopixel
+    //% weight=78
+    //% subcategory="Neopixel"
     clear() {
       const stride = this.mode === NeoPixelMode.RGBW ? 4 : 3;
       this.buf.fill(0, this.start * stride, this._length * stride);
@@ -423,7 +423,7 @@ namespace JoviBit {
     }
   }
   /**
-   * Crea un driver de NeoPixel para 'numleds' LEDs
+   * Crea un driver de NeoPixel para el LED
    * @param pin the pin where the neopixel is connected.
    * @param numleds number of leds in the strip, eg: 24,30,60,64
    */
@@ -463,8 +463,8 @@ namespace JoviBit {
    * @param color
    *
    */
-  //% weight=2 blockGap=8
   //% blockId="neopixel_colors" block="devuelve el valor del color %color"
+  //% weight=2 blockGap=8
   //% subcategory=Neopixel
   export function colors(color: NeoPixelColors): number {
     return color;
