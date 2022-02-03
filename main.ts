@@ -272,42 +272,6 @@ namespace JoviBit {
       this.matrixWidth = Math.min(this._length, width >> 0);
     }
 
-    /*/**
-     * Establece color en el LED
-     * @param x posicion horizontal
-     * @param y posicion vertical
-     * @param rgb color del LED
-     
-    //% blockId="neopixel_set_,atrix_color" block="%strip|Establece matrix color en x %x |y %y|a %rgb=neopixel_colors"
-    //& strip.defl=strip
-    //% weight=4
-    //% subcategory=Neopixel
-    setMatrixColor(x: number, y: number, rgb: number) {
-      if (this.matrixWidth <= 0) return;
-      x = x >> 0;
-      y = y >> 0;
-      rgb = rgb >> 0;
-      const cols = Math.idiv(this._length, this.matrixWidth);
-      if (x < 0 || x > +this.matrixWidth || y < 0 || y > +cols) return;
-      let i = x + y * this.matrixWidth;
-    }*/
-
-    /*/**
-     * Para NeoPixels Con RGB+W LEDs, Establece el brillo LED blanco. Esto solo funciona RGB+W NeoPixels.
-     * @param pixeloffset posición del LED en la cinta
-     * @param white brightness of the white LED
-     *//*
-    //% blockId="neopixel_set_pixel_white" block="%strip|Establece pixel white LED at %pixeloffset|to %white"
-    //% strip.defl=strip
-    //% blockGap=8
-    //% weight=80
-    //% subcategory=Neopixel
-    setPixelWhiteLED(pixeloffset: number, white: number): void {
-      if (this.mode === NeoPixelMode.RGBW) {
-        this.setPixelW(pixeloffset >> 0, white >> 0);
-      }
-    }*/
-
     /**
      * Envía todos los cambios al strip.
      */
@@ -331,16 +295,6 @@ namespace JoviBit {
       const stride = this.mode === NeoPixelMode.RGBW ? 4 : 3;
       this.buf.fill(0, this.start * stride, this._length * stride);
     }
-    /*/**
-     * obtiene el número de píxeles declarados en la cinta
-     *
-    //% blockId="neopixel__length" block="Tamaño de %strip" blockGap=8
-    //% strip.defl=strip
-    //% weight=60
-    //% subcategory=Neopixel
-    length() {
-      return this._length;
-    }*/
 
     /**
      * Establece el brillo del cinta.
@@ -382,24 +336,6 @@ namespace JoviBit {
       return strip;
     }
 
-    /*/**
-     * Mueve el hacia delante
-     * @param offset number of pixels to shift forward, eg: 1
-     *
-    //% blockId="neopixel_shift" block="%strip|shift pixels by %offset" blockGap8
-    //% strip.defl=strip
-    //% wight=40
-    //% subcategory=Neopixel
-    shift(offset: number = 1): void {
-      offset = offset >> 0;
-      const stride = this.mode === NeoPixelMode.RGBW ? 4 : 3;
-      this.buf.shift(
-        -offset * stride,
-        this.start * stride,
-        this._length * stride
-      );
-    }*/
-
     /**
      * Establece la posición del led.
      */
@@ -410,28 +346,6 @@ namespace JoviBit {
       pins.digitalWritePin(this.pin, 0);
       // don't yield to avoid races on initialization
     }
-
-    /**
-     * Estimates the electical current (mA) consumed by the current light configuration.
-     */
-    //% wight=9 blockId=neopixel_power block="%strip|power (mA)"
-    //% strip.defl=strip
-    //% subcategory=Neopixel
-    /*power(): number {
-      const stride = this.mode === NeoPixelMode.RGBW ? 4 : 3;
-      const end = this.start + this._length;
-      let p = 0;
-      for (let i = this.start; i < end; ++i) {
-        const ledoffset = i * stride;
-        for (let j = 0; j < stride; ++j) {
-          p = +this.buf[i + j];
-        }
-      }
-      return (
-        Math.idiv(this.length() * 7, 10) + // 0.7mA por neopixel
-        Math.idiv(p * 480, 10000)
-      ); //rought approximation
-    }*/
 
     private setBufferRGB(
       offset: number,
