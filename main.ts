@@ -10,7 +10,7 @@ enum Unitat_Distancia {
   //% block="cm" enumval=1
   Unitat_Distancia_cm,
 
-  //% block="polzada" enumval=2
+  //% block="pulgadas" enumval=2
   Unitat_Distancia_inch,
 }
 enum Pin {
@@ -291,7 +291,7 @@ namespace JoviBit {
     //% strip.defl=strip
     //% weight=76
     //% subcategory=Neopixel
-    clear(): void {
+    clear() {
       const stride = this.mode === NeoPixelMode.RGBW ? 4 : 3;
       this.buf.fill(0, this.start * stride, this._length * stride);
     }
@@ -452,7 +452,7 @@ namespace JoviBit {
    * @param blue
    */
   //% weight=1
-  //% blockId="neopixel_colors" block="%color"
+  //% blockId="neopixel_colors" block="rojo %red| verde %green |azul %blue"
   //% subcategory=Neopixel
   export function rgb(red: number, green: number, blue: number): number {
     return packRGB(red, green, blue);
@@ -464,7 +464,7 @@ namespace JoviBit {
    *
    */
   //% weight=1 blockGap=8
-  //% blockId="neopixel_colors" block="%color"
+  //% blockId="neopixel_colors" block="devuelve el valor del color %NeoPixelColors"
   //% subcategory=Neopixel
   export function colors(color: NeoPixelColors): number {
     return color;
