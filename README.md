@@ -20,14 +20,14 @@ El bloque ``moverServo`` tiene un rango de 0 a 180, donde 90 es el punto medio y
 ### ``NeoPixel``
 
 ```blocks
-let strip: JoviBit.Strip = null
+let led: JoviBit.led = null
 basic.forever(function () {
-    strip = JoviBit.create(NeoPixelMode.RGB)
-    strip.showColor(NeoPixelColors.Blue)
-    strip.setBrightness(20)
-    strip.show()
-    strip.setPixelColor(1, JoviBit.rgb(40, 4, 80))
-    strip.show()
+    led = JoviBit.create(NeoPixelMode.RGB)
+    led.showColor(NeoPixelColors.Blue)
+    led.setBrightness(20)
+    led.show()
+    led.setPixelColor(1, JoviBit.rgb(40, 4, 80))
+    led.show()
 })
 ```
 
