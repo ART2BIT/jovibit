@@ -463,7 +463,7 @@ namespace JoviBit {
    * @param color
    *
    */
-  //% weight=1 blockGap=8
+  //% weight=2 blockGap=8
   //% blockId="neopixel_colors" block="devuelve el valor del color %NeoPixelColors"
   //% subcategory=Neopixel
   export function colors(color: NeoPixelColors): number {
