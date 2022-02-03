@@ -548,9 +548,8 @@ namespace JoviBit {
     Shortest,
   }
   /**
-   *
-   * @param pin
-   * @returns
+   * Pins helper es un encapsulador que tiene como objetivo 
+   * "traducción" del pin de la microbit al pin de jovibit.
    */
 }
 namespace pinsHelper {
