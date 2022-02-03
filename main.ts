@@ -162,7 +162,7 @@ namespace JoviBit {
 
   //Neopixel//
 
-  export class led {
+  export class Led {
     buf: Buffer;
     pin: DigitalPin;
 
@@ -392,8 +392,8 @@ namespace JoviBit {
   //% trackArgs=0,2
   //% blockSetVariable=led
   //% subcategory=Neopixel
-  export function create(mode: NeoPixelMode): led {
-    let led = new led();
+  export function create(mode: NeoPixelMode): Led {
+    let led = new Led();
     let stride = mode === NeoPixelMode.RGBW ? 4 : 3;
     led.buf = pins.createBuffer(1 * stride);
     led.start = 0;
