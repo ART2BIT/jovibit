@@ -5,34 +5,71 @@
 
 ## Bloques
 
+## Sonarbit
+
+### ``Distancia Ultrasónica``
+
+```blocks
+let distancia = JoviBit.sonarbit_distancia(Unitat_Distancia.Unitat_Distancia._mm, Pin.P0)
+basic.pause(100)
+basic.showNumber(distancia)
+```
+
+Este bloque devuelve la distancia que hay entre la microbit y el objeto que tiene delante.
+
+## ``Motor``
+
+### ``motor``
+
+```blocks
+JoviBit.motor(Pin.P0)
+```
+
+Este bloque manda un pulso al pin por lo que activa o desactiva el motor, según su estado anterior.
+
+## ``Servo``
+
 ### ``moverServo``
 
 ```blocks
 for (let index = 0; index < 8; index++) {
         JoviBit.moverServo(Pin.P0, 125)
         basic.pause(200)
-        JoviBit.pararServo(Pin.P0)
     }
 ```
 
-El bloque ``moverServo`` tiene un rango de 0 a 180, donde 90 es el punto medio y para la rueda del servo.
+El bloque ``moverServo`` tiene un rango de 0 a 180 grados, se debe pensar más en velocidad que no en posición. 
+El punto medio es 90, aquí el servo no se moverá, si se pone a 100 se moverá en sentido horario lento, si se pone 180 irá en el mismo sentido pero a máxima velocidad, 
+si se pone a 0 irá a máxima velocidad en sentido antihorario.
 
-### ``NeoPixel``
+
+### ```pararServo``
 
 ```blocks
-let strip: JoviBit.Strip = null
+JoviBit.pararServo(Pin.P0)
+```
+
+detiene el servo(le pasa por parametro 90 grados).
+
+## ``NeoPixel``
+
+### ``Inicializar NeoPixel``
+```blocks
+let led: JoviBit.led = null
 basic.forever(function () {
-    strip = JoviBit.create(NeoPixelMode.RGB)
-    strip.showColor(NeoPixelColors.Blue)
-    strip.setBrightness(20)
-    strip.show()
-    strip.setPixelColor(1, JoviBit.rgb(40, 4, 80))
-    strip.show()
+    led = JoviBit.create(NeoPixelMode.RGB)
+    led.showColor(NeoPixelColors.Blue)
+    led.setBrightness(20)
+    led.show()
+    led.setPixelColor(1, JoviBit.rgb(40, 4, 80))
+    led.show()
 })
 ```
 
 Para poder iniciar NeoPixel y dar color al led de la placa de extensión debemos utilizar la funcion ``create``.
 Cada vez que se modifique el color o la intensidad, se debe llamar bloque ``show``
+
+
 
 ## Usar como extensión
 

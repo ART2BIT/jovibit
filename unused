@@ -4,8 +4,8 @@
      * @param y posicion vertical
      * @param rgb color del LED
      
-    //% blockId="neopixel_set_,atrix_color" block="%strip|Establece matrix color en x %x |y %y|a %rgb=neopixel_colors"
-    //& strip.defl=strip
+    //% blockId="neopixel_set_,atrix_color" block="%led|Establece matrix color en x %x |y %y|a %rgb=neopixel_colors"
+    //& led.defl=led
     //% weight=4
     //% subcategory=Neopixel
     setMatrixColor(x: number, y: number, rgb: number) {
@@ -23,8 +23,8 @@
      * @param pixeloffset posición del LED en la cinta
      * @param white brightness of the white LED
      *//*
-    //% blockId="neopixel_set_pixel_white" block="%strip|Establece pixel white LED at %pixeloffset|to %white"
-    //% strip.defl=strip
+    //% blockId="neopixel_set_pixel_white" block="%led|Establece pixel white LED at %pixeloffset|to %white"
+    //% led.defl=led
     //% blockGap=8
     //% weight=80
     //% subcategory=Neopixel
@@ -37,8 +37,8 @@
         /*/**
      * obtiene el número de píxeles declarados en la cinta
      *
-    //% blockId="neopixel__length" block="Tamaño de %strip" blockGap=8
-    //% strip.defl=strip
+    //% blockId="neopixel__length" block="Tamaño de %led" blockGap=8
+    //% led.defl=led
     //% weight=60
     //% subcategory=Neopixel
     length() {
@@ -49,8 +49,8 @@
      * Mueve el hacia delante
      * @param offset number of pixels to shift forward, eg: 1
      *
-    //% blockId="neopixel_shift" block="%strip|shift pixels by %offset" blockGap8
-    //% strip.defl=strip
+    //% blockId="neopixel_shift" block="%led|shift pixels by %offset" blockGap8
+    //% led.defl=led
     //% wight=40
     //% subcategory=Neopixel
     shift(offset: number = 1): void {
@@ -66,8 +66,8 @@
         /**
      * Estimates the electical current (mA) consumed by the current light configuration.
      */
-    //% wight=9 blockId=neopixel_power block="%strip|power (mA)"
-    //% strip.defl=strip
+    //% wight=9 blockId=neopixel_power block="%led|power (mA)"
+    //% led.defl=led
     //% subcategory=Neopixel
     /*power(): number {
       const stride = this.mode === NeoPixelMode.RGBW ? 4 : 3;
@@ -87,11 +87,11 @@
     
 
         /**
-     * Establece el número de píxeles en la matriz de strip
+     * Establece el número de píxeles en la matriz de led
      * @param width número de pixeles en una fila
      */
-    //% blockId=neopixel_set_matrix_width block="%strip|establece la amplitud de la matriz %width"
-    //% strip.defl=strip
+    //% blockId=neopixel_set_matrix_width block="%led|establece la amplitud de la matriz %width"
+    //% led.defl=led
     //% blockGap=8
     //% weight=5
     //% subcategory=Neopixel
@@ -106,24 +106,24 @@
      * @param _length numero de LEDs que tiene la dimensión
      */
     //% weight=89
-    //% blockId="neopixel_range" block="%strip|rango desde %start|con %_length|leds"
-    //% strip.defl=strip
+    //% blockId="neopixel_range" block="%led|rango desde %start|con %_length|leds"
+    //% led.defl=led
     //% blockSetVariable=range
     //% subcategory=Neopixel
-    range(start: number, _length: number): Strip {
+    range(start: number, _length: number): led {
       start = start >> 0;
       _length = _length >> 0;
-      let strip = new Strip();
-      strip.buf = this.buf;
-      strip.pin = this.pin;
-      strip.brightness = this.brightness;
-      strip.start = this.start + Math.clamp(0, this._length - 1, start);
-      strip._length = Math.clamp(
+      let led = new led();
+      led.buf = this.buf;
+      led.pin = this.pin;
+      led.brightness = this.brightness;
+      led.start = this.start + Math.clamp(0, this._length - 1, start);
+      led._length = Math.clamp(
         0,
-        this._length - (strip.start - this.start),
+        this._length - (led.start - this.start),
         _length
       );
-      strip.matrixWidth = 0;
-      strip.mode = this.mode;
-      return strip;
+      led.matrixWidth = 0;
+      led.mode = this.mode;
+      return led;
     }
