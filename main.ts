@@ -34,6 +34,9 @@ enum Pin {
 
   //% block="G"
   P15 = 15,
+
+  //% block="Led"
+  P16 = 16,
 }
 
 enum NeoPixelColors {
@@ -303,7 +306,7 @@ namespace JoviBit {
      */
     //% weight=10
     //% subcategory=Neopixel
-    setPin(pin: DigitalPin = DigitalPin.P16): void {
+    setPin(pin: DigitalPin): void {
       this.pin = pin;
       pins.digitalWritePin(this.pin, 0);
       // don't yield to avoid races on initialization
@@ -387,13 +390,13 @@ namespace JoviBit {
   /**
    * Crea un driver de NeoPixel para el LED
    */
-  //% blockId="neopixel_create" block="NeoPixel en %mode"
+  //% blockId="neopixel_create" block="NeoPixel en %mode |al %pin"
   //% wight=90 blockGap=8
   //% trackArgs=0,2
   //% blockSetVariable=led
   //% subcategory=Neopixel
-  export function create(mode: NeoPixelMode, pin : DigitalPin): Strip {
-    let led = new Strip();
+  export function create(mode: NeoPixelMode, pin : Pin): Led {
+    let led = new Led();
     let stride = mode === NeoPixelMode.RGBW ? 4 : 3;
     led.buf = pins.createBuffer(1 * stride);
     led.start = 0;
@@ -401,7 +404,7 @@ namespace JoviBit {
     led.mode = mode || NeoPixelMode.RGB;
     led.matrixWidth = 0;
     led.setBrightness(128);
-    led.setPin(pin);
+    led.setPin(pinsHelper.pinToDigitalPin(pin));
     return led;
   }
 
