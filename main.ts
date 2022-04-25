@@ -392,8 +392,8 @@ namespace JoviBit {
   //% trackArgs=0,2
   //% blockSetVariable=led
   //% subcategory=Neopixel
-  export function create(mode: NeoPixelMode): Led {
-    let led = new Led();
+  export function create(mode: NeoPixelMode, pin : DigitalPin): Strip {
+    let led = new Strip();
     let stride = mode === NeoPixelMode.RGBW ? 4 : 3;
     led.buf = pins.createBuffer(1 * stride);
     led.start = 0;
@@ -401,7 +401,7 @@ namespace JoviBit {
     led.mode = mode || NeoPixelMode.RGB;
     led.matrixWidth = 0;
     led.setBrightness(128);
-    led.setPin(DigitalPin.P16);
+    led.setPin(pin);
     return led;
   }
 
@@ -529,6 +529,8 @@ namespace pinsHelper {
       truePin = DigitalPin.P14;
     } else if (pin === 15) {
       truePin = DigitalPin.P15;
+    } else if (pin === 16){
+      truePin = DigitalPin.P16
     }
     return truePin;
   }
@@ -548,6 +550,8 @@ namespace pinsHelper {
       truePin = AnalogPin.P14;
     } else if (pin === 15) {
       truePin = AnalogPin.P15;
+    } else if (pin === 16) {
+      truePin = AnalogPin.P16;
     }
     return truePin;
   }
