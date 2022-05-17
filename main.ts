@@ -122,18 +122,25 @@ namespace JoviBit {
   //MOTOR
 
   /**
-   * Activa o desactiva el motor
+   * Activa el motor
    */
-  //% blockId=Motor_Brick block="Activa o desactiva el motor en el pin %Pin"
+  //% blockId=Motor_Brick block="Activa el motor en el pin %Pin"
   //% weight=10
   //% subcategory=Motor
-  export function motor(pin: Pin): void {
+  export function turnOn(pin: Pin): void {
     let truePin: DigitalPin = pinsHelper.pinToDigitalPin(pin);
-    if (pins.digitalReadPin(truePin) === 0) {
-      pins.digitalWritePin(truePin, 1);
-    } else {
-      pins.digitalWritePin(truePin, 0);
-    }
+    pins.digitalWritePin(truePin, 1);
+  }
+
+    /**
+   * Desactiva el motor
+   */
+  //% blockId=Motor_Brick block="Desactiva el motor en el pin %Pin"
+  //% weight=10
+  //% subcategory=Motor
+  export function turnOff(pin: Pin): void {
+    let truePin: DigitalPin = pinsHelper.pinToDigitalPin(pin);
+    pins.digitalWritePin(truePin, 0);
   }
 
   // Servo//
