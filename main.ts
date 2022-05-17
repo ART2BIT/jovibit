@@ -124,7 +124,7 @@ namespace JoviBit {
   /**
    * Activa el motor
    */
-  //% blockId=Motor_Brick block="Activa el motor en el pin %Pin"
+  //% blockId=Motor_Brick_On block="Activa el motor en el pin %Pin"
   //% weight=10
   //% subcategory=Motor
   export function turnOn(pin: Pin): void {
@@ -135,7 +135,7 @@ namespace JoviBit {
     /**
    * Desactiva el motor
    */
-  //% blockId=Motor_Brick block="Desactiva el motor en el pin %Pin"
+  //% blockId=Motor_Brick_Off block="Desactiva el motor en el pin %Pin"
   //% weight=10
   //% subcategory=Motor
   export function turnOff(pin: Pin): void {
