@@ -53,7 +53,7 @@ detiene el servo(le pasa por parametro 90 grados).
 
 ## ``NeoPixel``
 
-Para poder iniciar NeoPixel y dar color al led de la placa de extensión debemos declarar la variable ``let miLed: JoviBit.Led = null``.
+Para poder iniciar NeoPixel y dar color al led de la placa de extensión debemos declarar la variable ``let miLed: JoviBit.Led``.
 Cada vez que se modifique el color o la intensidad, se debe llamar bloque ``show``
 
 ### ``Inicializar NeoPixel``
@@ -65,7 +65,7 @@ input.onButtonPressed(Button.A, function () {
     miLed.clear()
     miLed.show()
 })
-let miLed: JoviBit.Led = null
+let miLed: JoviBit.Led
 miLed = JoviBit.create(NeoPixelMode.RGB, Pin.P16)
 })
 ```
