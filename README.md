@@ -22,10 +22,12 @@ Este bloque devuelve la distancia que hay entre la microbit y el objeto que tien
 ### ``motor``
 
 ```blocks
-JoviBit.motor(Pin.P0)
+JoviBit.turnOn(Pin.P0)
+JoviBit.turnOff(Pin.P0)
+
 ```
 
-Este bloque manda un pulso al pin por lo que activa o desactiva el motor, según su estado anterior.
+Estos bloques manda un pulso al pin por lo que activa o desactiva el motor.
 
 ## ``Servo``
 
