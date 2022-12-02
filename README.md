@@ -55,7 +55,7 @@ detiene el servo(le pasa por parametro 90 grados).
 
 ## ``NeoPixel``
 
-Para poder iniciar NeoPixel y dar color al led de la placa de extensión debemos declarar la variable ``let miLed: JoviBit.Led``.
+Para poder iniciar NeoPixel y dar color al led de la placa de extensión debemos declarar la variable ``let miLed: JoviBit.Led = null``.
 Cada vez que se modifique el color o la intensidad, se debe llamar bloque ``show``
 
 ### ``Inicializar NeoPixel``
@@ -67,12 +67,12 @@ input.onButtonPressed(Button.A, function () {
     miLed.clear()
     miLed.show()
 })
-let miLed: JoviBit.Led
+let miLed: JoviBit.Led = null
 miLed = JoviBit.create(NeoPixelMode.RGB, Pin.P16)
 })
 ```
 En este ejemplo utilizamos declaramos la variable en el bloque al iniciar, al darle al botón 'A' de la microbit procedemos a enseñar los colores del arcoiris.
-Para que nos muestres los colores en el Led debemos introducir el bloque ``show`` justo después. después apagamos el led con el bloque ``clear``.
+Para que nos muestres los colores en el Led debemos introducir el bloque ``show`` justo después. después apagamos el led con el bloque ``clear()`` o apaga.
 
 
 
