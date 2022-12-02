@@ -74,7 +74,8 @@ let miLed: JoviBit.Led = JoviBit.create(NeoPixelMode.RGB, Pin.P16)
 En este ejemplo queremos que al darle al botón 'A' de la microbit procedemos a enseñar los colores del arcoiris.
 Comenzamos declarando la variable en el bloque "al iniciar", dentro de NeoPixel está una función con los parámetros correctos, pero podemos crearla nosotros mismos.
 Es muy importante que pasemos el pin Led como parámetro a la variable, de otra manera no funcionará.
-Para que nos muestres los colores en el Led debemos introducir el bloque ``show()``` justo después. después apagamos el led con el bloque ``clear()`` o apaga.
+Para que nos muestres los colores en el Led debemos introducir el bloque ``show()`` justo después. después apagamos el led con el bloque
+``clear()`` o apaga.
 
 
 
