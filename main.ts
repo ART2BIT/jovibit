@@ -143,31 +143,32 @@ namespace JoviBit {
     pins.digitalWritePin(truePin, 0);
   }
 
-  // Servo//
+  //Servo//
 
   //Funciones helper
   function initPCA(): void {}
+/**
+ * Configuración del servo
+ * @param pin pin
+ * @param value valor booleano
+ */
+//% blockId="ConfiguracionServo"
+//% block=""
+//% subcategory=Servo
+  export function configuracion(pin: Pin){
+	pins.servoSetContinuous(pinsHelper.pinToAnalogPin(pin),  false)
 
-  /**
-   * Mueve el servo a la velocidad deseada
-   * @param pin servo en el pin(A al G) eg:0
-   * @param vel
-   */
-  //% blockId="MoverServo"
-  //% block="Mueve el servo %pin| a la velocidad %vel"
-  //% subcategory=Servo
-  export function moverServo(pin: Pin, vel: number): void {
-    pins.servoWritePin(pinsHelper.pinToAnalogPin(pin), vel);
   }
   /**
-   * Detiene el servo
-   * @param pin servo en el pin
+   * Mueve el servo a al angulo deseado
+   * @param pin servo en el pin(A al G) eg:0
+   * @param ang
    */
-  //% blockId="PararServo"
-  //% block="Para el servo %pin"
+  //% blockId="MoverServo"
+  //% block="Mueve el servo %pin| al angulo %ang"
   //% subcategory=Servo
-  export function pararServo(pin: Pin): void {
-    pins.servoWritePin(pinsHelper.pinToAnalogPin(pin), 90);
+  export function moverServo(pin: Pin, ang: number): void {
+    pins.servoWritePin(pinsHelper.pinToAnalogPin(pin), ang);
   }
 
   //Neopixel//
