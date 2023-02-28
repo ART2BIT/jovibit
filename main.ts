@@ -147,17 +147,17 @@ namespace JoviBit {
 
   //Funciones helper
   function initPCA(): void {}
+  let base : number;
 /**
- * Configuración del servo
+ * Configuración del servo para que deje de ser continuo.
  * @param pin pin
  * @param value valor booleano
  */
 //% blockId="ConfiguracionServo"
-//% block=""
+//% block="Inicializador del servo en %pin"
 //% subcategory=Servo
   export function configuracion(pin: Pin){
 	pins.servoSetContinuous(pinsHelper.pinToAnalogPin(pin),  false)
-
   }
   /**
    * Mueve el servo a al angulo deseado
