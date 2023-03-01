@@ -584,4 +584,3 @@ namespace JoviBit {
 			return truePin;
 		}
 	}
-}
