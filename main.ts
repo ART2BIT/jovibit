@@ -157,7 +157,7 @@ namespace JoviBit {
 //% block="Inicializador del servo en %pin"
 //% subcategory=Servo
   export function configuracion(pin: Pin){
-	pins.servoSetContinuous(pinsHelper.pinToAnalogPin(pin),  false)
+	pins.servoSetContinuous(pinsHelper.pinToAnalogPin(pin),  true)
   }
   /**
    * Mueve el servo a al angulo deseado
