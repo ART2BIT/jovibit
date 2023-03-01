@@ -2,7 +2,6 @@
  * Use this file to define custom functions and blocks.
  * Read more at https://makecode.microbit.org/blocks/custom
  */
-
 enum Unitat_Distancia {
   //% block="mm" enumval=0
   Unitat_Distancia_mm,
@@ -140,25 +139,19 @@ namespace JoviBit {
   //% subcategory=Motor
   export function turnOff(pin: Pin): void {
     let truePin: DigitalPin = pinsHelper.pinToDigitalPin(pin);
-    pins.digitalWritePin(truePin, 0);
+	  pins.digitalWritePin(truePin, 0);
+	  pins.
   }
 
   //Servo//
 
   //Funciones helper
   function initPCA(): void {}
-  let base : number;
 /**
  * Configuración del servo para que deje de ser continuo.
  * @param pin pin
  * @param value valor booleano
  */
-//% blockId="ConfiguracionServo"
-//% block="Inicializador del servo en %pin"
-//% subcategory=Servo
-  export function configuracion(pin: Pin){
-	  pins.analogSetPeriod(pinsHelper.pinToAnalogPin(pin), 20)
-  }
   /**
    * Mueve el servo a al angulo deseado
    * @param pin servo en el pin(A al G) eg:0
@@ -168,7 +161,8 @@ namespace JoviBit {
   //% block="Mueve el servo %pin| al angulo %ang"
   //% subcategory=Servo
   export function moverServo(pin: Pin, ang: number): void {
-    pins.servoWritePin(pinsHelper.pinToAnalogPin(pin), ang);
+	  pins.servoSetContinuous(pinsHelper.pinToAnalogPin(pin), false)
+	  pins.servoWritePin(pinsHelper.pinToAnalogPin(pin), ang)
   }
 
   //Neopixel//
@@ -565,5 +559,27 @@ namespace pinsHelper {
       truePin = AnalogPin.P16;
     }
     return truePin;
-  }
+	}
+	export function pinPins(pin: Pin) {
+		let truePin;
+		if (pin === 0) {
+			truePin = pins.P0;
+		  } else if (pin === 1) {
+			truePin = pins.P1;
+		  } else if (pin === 2) {
+			truePin = pins.P2;
+		  } else if (pin === 8) {
+			truePin = pins.P8;
+		  } else if (pin === 13) {
+			truePin = pins.P13;
+		  } else if (pin === 14) {
+			truePin = pins.P14;
+		  } else if (pin === 15) {
+			truePin = pins.P15;
+		  } else if (pin === 16) {
+			truePin = pins.P16;
+		}
+		
+		  return truePin;
+	}
 }
