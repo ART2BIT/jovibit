@@ -140,7 +140,7 @@ namespace JoviBit {
   export function turnOff(pin: Pin): void {
     let truePin: DigitalPin = pinsHelper.pinToDigitalPin(pin);
 	  pins.digitalWritePin(truePin, 0);
-	  pins.
+	  
   }
 
   //Servo//
