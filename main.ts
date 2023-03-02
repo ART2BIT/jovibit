@@ -37,6 +37,16 @@ enum Pin {
   //% block="Led"
   P16 = 16,
 }
+enum servoPin {
+	  //% block="A"
+	  P0 = 0,
+
+	  //% block="B"
+	  P1 = 1,
+	
+	  //% block="C"
+	  P2 = 2
+}
 
 enum NeoPixelColors {
   //% block=rojo
@@ -144,27 +154,170 @@ namespace JoviBit {
 
 	//Servo//
 
-	//Funciones helper
-	function initPCA(): void { }
-	/**
-	 * Configuración del servo para que deje de ser continuo.
-	 * @param pin pin
-	 * @param value valor booleano
-	 */
-		/**
-		 * Mueve el servo a al angulo deseado
-		 * @param pin servo en el pin(A al G) eg:0
-		 * @param ang
-		 */
-		//% blockId="MoverServo"
-		//% block="Mueve el servo %pin| al angulo %ang"
-		//% subcategory=Servo
-		export function moverServo(pin: Pin, ang: number): void {
-			const servo = new servos.PinServo(new MicrobitPin(pin))
-			servo.setRange(0, 180)
-			servo.setAngle(ang)
+	export class Servo {
+		private minAngle: number;
+		private maxAngle: number;
+		private stopOnNeutral: boolean;
+		private angle: number;
+
+		constructor() {
+			this.angle = undefined;
+			this.minAngle = 0;
+			this.maxAngle = 180;
+			this.stopOnNeutral = false;
 		}
-	  
+		private clampDegrees(degrees: number): number{
+			degrees = degrees | 0;
+            degrees = Math.clamp(this.minAngle, this.maxAngle, degrees);
+            return degrees;
+		}
+		/**
+		 * Establece el angulo del servo
+		 */
+		//% blockId=servoangle block="establece el angulo %servo a %degrees=protractorPicker °"
+		//% degrees.defl=90
+		//% servo.fieldEditor="gridpicker"
+		//% servo.fieldOptions.width=220
+		//% servo.fieldOptions.columns=2
+		//% blockGap=8
+		//% parts=microservo trackArgs=0
+		//% subcategory=Servo
+		//% group="Positional"
+		setAngle(degrees: number) { 
+			degrees = this.clampDegrees(degrees);
+				degrees = this.clampDegrees(degrees);
+				this.internalSetContinuous(false);
+				this.angle = this.internalSetAngle(degrees);
+			
+		}
+		get Angle(){
+			return this.angle || 90;
+		}
+		
+		protected internalSetContinuous(continuous: boolean): void{
+
+		}
+
+		protected internalSetAngle(angle: number): number{
+			return 0
+		}
+		/**
+		 * Establece la velocidad del servo continuo
+		 * @param vel la velocidad del motor de -100% a 100%
+		 */
+		//% blockId=servorun block=" %servo velocidad continua a %speed=speedPicker \\%"
+		//% servo.fieldEditor="gridpicker"
+		//% servo.fieldOptions.width=220
+		//% servo.fieldOptions.columns=2
+		//% parts=microservo trackArgs=0
+		//% subcategory=Servo
+		//% group="Continuo"
+		//% blockGap=8
+		run(speed: number): void{
+			const degrees = this.clampDegrees(Math.map(speed, -100, 100, this.minAngle, this, this.maxAngle));
+			const neutral = (this.maxAngle - this.minAngle) >> 1;
+			this.internalSetContinuous(true);
+			if (this.stopOnNeutral && degrees == neutral)
+				this.stop();
+			else
+				this.angle = this.internalSetAngle(degrees);
+		}
+
+		/**
+		 * Establece el ancho del pulso en microsegundos
+		 * @param micros el ancho del pulso en microsegundos
+		 */
+		//% blockId=servosetpulse block="establece el pulso %servo en %micros μs"
+		//% micros.min=500 micros.max=2500
+        //% micros.defl=1500
+        //% servo.fieldEditor="gridpicker"
+        //% servo.fieldOptions.width=220
+        //% servo.fieldOptions.columns=2
+        //% parts=microservo trackArgs=0
+		//% subcategory=Servo
+        //% group="Configuration"
+        //% blockGap=8
+		setPulse(micros: number) {
+			micros = micros | 0;
+			micros = Math.clamp(500, 2500, micros);
+			this.internalSetPulse(micros);
+		}
+
+		protected internalSetPulse(micros: number): void { }
+		
+		/**
+		 * Para el servo en la posición actual
+		 */
+		//parará el servo en la posición actual en vez de volver a la posición neutral
+		//% weight=10
+		//% blockId=servostop block="stop %servo"
+		//% servo.fieldEditor="gridpicker"
+		//% servo.fieldOptions.width=220
+		//% servo.fieldOptions.columns=2
+		//% parts=microservo tracksArgs=0
+		//% subcategory=Servo
+		//% group="Continuo"
+		//% blockGap=8
+		stop() {
+			if (this.angle != undefined)
+				this.internalStop();
+		}
+		/**
+         * Muestra el angulo mínimo
+         */
+        public get MinAngle() {
+            return this.minAngle;
+        }
+
+        /**
+         * Muestra el angulo máximo
+         */
+        public get MaxAngle() {
+            return this.maxAngle;
+		}
+		setRange(minAngle: number, maxAngle: number) {
+			this.minAngle = Math.max(0, Math.min(90, minAngle | 0));
+			this.maxAngle = Math.max(90, Math.min(180, maxAngle | 0));
+		}
+		/**
+		 * establece el modo stop para que pare cuando llegue a la posición neutral
+		 * @param enabled 
+		 */
+		//% blockId=servostoponneutral block="establece paro en %servo en la posición neutral"
+		//% enabled.shadow=toggleOnOff
+		//% group="Configuration"
+		//% blockGap=8
+		//% subcategory=Servo
+		public setStopOnNeutral(enabled: boolean) {
+			this.stopOnNeutral = true;
+		}
+
+		protected internalStop() { }
+
+  }
+	export class PinServo extends Servo {
+		private pin: PwmOnlyPin;
+
+		constructor(pin: PwmOnlyPin) {
+			super();
+			this.pin;
+		}
+
+		protected internalSetAngle(angle: number): number {
+			this.pin.servoWrite(angle);
+			return angle;
+		}
+		protected internalSetContinuous(continuous: boolean): void {
+			this.pin.servoSetContinuous(continuous);
+		}
+		protected internalSetPulse(micros: number): void {
+			this.pin.servoSetPulse(micros);
+		}
+		protected internalStop(): void {
+			this.pin.digitalRead();
+			this.pin.setPull(PinPullMode.PullNone);
+		}
+	  }
 
 		//Neopixel//
 
