@@ -214,7 +214,7 @@ namespace JoviBit {
 		//% group="Continuo"
 		//% blockGap=8
 		run(speed: number): void{
-			const degrees = this.clampDegrees(Math.map(speed, -100, 100, this.minAngle, this, this.maxAngle));
+			const degrees = this.clampDegrees(Math.map(speed, -100, 100, this.minAngle, this.maxAngle));
 			const neutral = (this.maxAngle - this.minAngle) >> 1;
 			this.internalSetContinuous(true);
 			if (this.stopOnNeutral && degrees == neutral)
