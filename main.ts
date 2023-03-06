@@ -271,7 +271,20 @@ namespace JoviBit {
 
         /**
          * Muestra el angulo máximo
+		 * @param minAngle el angulo mínimo de 0 a 90
+		 * @param maxAngle el angulo máximo de 90 a 180
          */
+		//% help=servo/set-range
+		//% blockId=setrange block="establece %servo el rango de %minAngle a %maxAngle"
+		//% minAngle.min=0 minAngle.max=90
+		//% maxAngle.min=90 maxAngle.max=180 maxAngle.defl=180
+		//% servo.fieldEditor="gridpicker"
+        //% servo.fieldOptions.width=220
+        //% servo.fieldOptions.columns=2
+        //% parts=microservo trackArgs=0
+		//% subcategory=Servo
+        //% group="Configuration"
+        //% blockGap=8
         public get MaxAngle() {
             return this.maxAngle;
 		}
@@ -298,9 +311,9 @@ namespace JoviBit {
 	export class PinServo extends Servo {
 		private pin: PwmOnlyPin;
 
-		constructor(pin: PwmOnlyPin) {
+		constructor(pin: Pin) {
 			super();
-			this.pin;
+			this.pin = pinsHelper.pinPins(pin);
 		}
 
 		protected internalSetAngle(angle: number): number {
@@ -714,25 +727,14 @@ namespace JoviBit {
 			}
 			return truePin;
 		}
-		export function pinPins(pin: Pin) {
+		export function pinPins(pin: Pin): PwmOnlyPin {
 			let truePin;
 			if (pin === 0) {
-				truePin = pins.P0;
+				truePin = new MicrobitPin(DigitalPin.P0);
 			} else if (pin === 1) {
-				truePin = pins.P1;
+				truePin = new MicrobitPin(DigitalPin.P1);
 			} else if (pin === 2) {
-				truePin = pins.P2;
-			} else if (pin === 8) {
-				truePin = pins.P8;
-			} else if (pin === 13) {
-				truePin = pins.P13;
-			} else if (pin === 14) {
-				truePin = pins.P14;
-			} else if (pin === 15) {
-				truePin = pins.P15;
-			} else if (pin === 16) {
-				truePin = pins.P16;
-			}
+				truePin = new MicrobitPin(DigitalPin.P2);
 		
 			return truePin;
 		}
