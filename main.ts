@@ -298,7 +298,7 @@ namespace JoviBit {
 			this.maxAngle = Math.max(90, Math.min(180, maxAngle | 0));
 		}
 		/**
-		 * establece el modo stop para que pare cuando llegue a la posición neutral
+		 * establece el modo sstop para que pare cuando llegue a la posición neutral
 		 * @param enabled 
 		 */
 		//% blockId=servostoponneutral block="establece paro en %servo en la posición neutral"
@@ -316,7 +316,7 @@ namespace JoviBit {
 	export class PinServo extends Servo {
 		private pin: PwmOnlyPin;
 
-		constructor(pin: Pin) {
+		constructor(pin: servoPin) {
 			super();
 			this.pin = pinsHelper.pinPins(pin);
 		}
@@ -732,7 +732,7 @@ namespace pinsHelper {
 		}
 		return truePin;
 	}
-	export function pinPins(pin: Pin): PwmOnlyPin {
+	export function pinPins(pin: servoPin): PwmOnlyPin {
 		let truePin;
 		if (pin === 0) {
 			truePin = new MicrobitPin(DigitalPin.P0);
