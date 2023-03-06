@@ -740,6 +740,17 @@ namespace pinsHelper {
 			truePin = new MicrobitPin(DigitalPin.P1);
 		} else if (pin === 2) {
 			truePin = new MicrobitPin(DigitalPin.P2);
+		} else if (pin === 8) {
+			truePin = new MicrobitPin(DigitalPin.P8);
+		} else if (pin === 13) {
+			truePin = new MicrobitPin(DigitalPin.P13);
+		} else if (pin === 14) {
+			truePin = new MicrobitPin(DigitalPin.P14);
+		} else if (pin === 15) {
+			truePin = new MicrobitPin(DigitalPin.P15);
+		} else if (pin === 16) {
+			truePin = new MicrobitPin(DigitalPin.P16);
+		}
 		
 			return truePin;
 		}
