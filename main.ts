@@ -38,14 +38,14 @@ enum Pin {
   P16 = 16,
 }
 enum servoPin {
-	  //% block="A"
-	  P0 = 0,
+    //% block="A"
+    P0 = 0,
 
-	  //% block="B"
-	  P1 = 1,
-	
-	  //% block="C"
-	  P2 = 2
+    //% block="B"
+    P1 = 1,
+
+    //% block="C"
+    P2 = 2,
 }
 
 enum NeoPixelColors {
@@ -176,9 +176,9 @@ namespace JoviBit {
 		 */
 		//% blockId=servoangle block="establece el angulo %servo a %degrees=protractorPicker °"
 		//% degrees.defl=90
-		//% servo.fieldEditor="gridpicker"
-		//% servo.fieldOptions.width=220
-		//% servo.fieldOptions.columns=2
+		//% jovibit.fieldEditor="gridpicker"
+		//% jovibit.fieldOptions.width=220
+		//% jovibit.fieldOptions.columns=2
 		//% weight=40
 		//% subcategory=Servo
 		setAngle(degrees: number) { 
@@ -204,9 +204,9 @@ namespace JoviBit {
 		 * @param vel la velocidad del motor de -100% a 100%
 		 */
 		//% blockId=servorun block=" %servo velocidad continua a %speed=speedPicker \\%"
-		//% servo.fieldEditor="gridpicker"
-		//% servo.fieldOptions.width=220
-		//% servo.fieldOptions.columns=2
+		//% jovibit.fieldEditor="gridpicker"
+		//% jovibit.fieldOptions.width=220
+		//% jovibit.fieldOptions.columns=2
 		//% weight=41
 		//% subcategory=Servo
 		run(speed: number): void{
@@ -226,9 +226,9 @@ namespace JoviBit {
 		//% blockId=servosetpulse block="establece el pulso %servo en %micros μs"
 		//% micros.min=500 micros.max=2500
         //% micros.defl=1500
-        //% servo.fieldEditor="gridpicker"
-        //% servo.fieldOptions.width=220
-        //% servo.fieldOptions.columns=2
+        //% jovibit.fieldEditor="gridpicker"
+        //% jovibit.fieldOptions.width=220
+        //% jovibit.fieldOptions.columns=2
         //% weight=42
 		//% subcategory=Servo
 		setPulse(micros: number) {
@@ -244,10 +244,10 @@ namespace JoviBit {
 		 */
 		//parará el servo en la posición actual en vez de volver a la posición neutral
 		//% weight=10
-		//% blockId=servostop block="stop %servo"
-		//% servo.fieldEditor="gridpicker"
-		//% servo.fieldOptions.width=220
-		//% servo.fieldOptions.columns=2
+		//% blockId=servostop block="para %servo"
+		//% jovibit.fieldEditor="gridpicker"
+		//% jovibit.fieldOptions.width=220
+		//% jovibit.fieldOptions.columns=2
 		//% weight=43
 		//% subcategory=Servo
 		stop() {
@@ -274,13 +274,12 @@ namespace JoviBit {
 		 * @param minAngle el angulo mínimo de 0 a 90
 		 * @param maxAngle el angulo máximo de 90 a 180
          */
-		//% help=servo/set-range
 		//% blockId=setrange block="establece %servo el rango de %minAngle a %maxAngle"
 		//% minAngle.min=0 minAngle.max=90
 		//% maxAngle.min=90 maxAngle.max=180 maxAngle.defl=180
-		//% servo.fieldEditor="gridpicker"
-        //% servo.fieldOptions.width=220
-        //% servo.fieldOptions.columns=2
+		//% jovibit.fieldEditor="gridpicker"
+        //% jovibit.fieldOptions.width=220
+        //% jovibit.fieldOptions.columns=2
         //% weight=44
 		//% subcategory=Servo
 		setRange(minAngle: number, maxAngle: number) {
@@ -288,7 +287,7 @@ namespace JoviBit {
 			this.maxAngle = Math.max(90, Math.min(180, maxAngle | 0));
 		}
 		/**
-		 * establece el modo sstop para que pare cuando llegue a la posición neutral
+		 * establece el modo stop para que pare cuando llegue a la posición neutral
 		 * @param enabled 
 		 */
 		//% blockId=servostoponneutral block="establece paro en %servo en la posición neutral"
@@ -305,9 +304,9 @@ namespace JoviBit {
 	export class PinServo extends Servo {
 		private pin: PwmOnlyPin;
 
-		constructor(pin: servoPin) {
+		constructor(pin: PwmPin) {
 			super();
-			this.pin = pinsHelper.pinPins(pin);
+			this.pin = pin;
 		}
 
 		protected internalSetAngle(angle: number): number {
@@ -325,6 +324,18 @@ namespace JoviBit {
 			this.pin.setPull(PinPullMode.PullNone);
 		}
 	  }
+    /**
+       * Crea un driver de servo
+       */
+		//% blockId="servocreate" block="Servo en %pin"
+		//% weight=90 blockGap=8
+		//% trackArgs=0,2
+		//% blockSetVariable=servo
+		//% subcategory=Servo
+    export function createServo(pin : servoPin): PinServo{
+      let servo = new JoviBit.PinServo(pinsHelper.pinPins(pin))
+      return servo
+    }
 
 		//Neopixel//
 
@@ -554,7 +565,7 @@ namespace JoviBit {
 		 * Crea un driver de NeoPixel para el LED
 		 */
 		//% blockId="neopixel_create" block="NeoPixel en %mode |al %pin"
-		//% wight=90 blockGap=8
+		//% weight=90 blockGap=8
 		//% trackArgs=0,2
 		//% blockSetVariable=led
 		//% subcategory=Neopixel
@@ -721,26 +732,15 @@ namespace pinsHelper {
 		}
 		return truePin;
 	}
-	export function pinPins(pin: servoPin): PwmOnlyPin {
+	export function pinPins(pin: servoPin): PwmPin {
 		let truePin;
 		if (pin === 0) {
-			truePin = new MicrobitPin(DigitalPin.P0);
+			truePin  = pins.P0;
 		} else if (pin === 1) {
-			truePin = new MicrobitPin(DigitalPin.P1);
+            truePin = pins.P1;
 		} else if (pin === 2) {
-			truePin = new MicrobitPin(DigitalPin.P2);
-		} else if (pin === 8) {
-			truePin = new MicrobitPin(DigitalPin.P8);
-		} else if (pin === 13) {
-			truePin = new MicrobitPin(DigitalPin.P13);
-		} else if (pin === 14) {
-			truePin = new MicrobitPin(DigitalPin.P14);
-		} else if (pin === 15) {
-			truePin = new MicrobitPin(DigitalPin.P15);
-		} else if (pin === 16) {
-			truePin = new MicrobitPin(DigitalPin.P16);
-		}
-		
+			truePin = pins.P2;
+        }
 			return truePin;
 		}
 }
