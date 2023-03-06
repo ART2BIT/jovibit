@@ -179,7 +179,7 @@ namespace JoviBit {
 		//% servo.fieldEditor="gridpicker"
 		//% servo.fieldOptions.width=220
 		//% servo.fieldOptions.columns=2
-		//% parts=microservo trackArgs=0
+		//% weight=40
 		//% subcategory=Servo
 		setAngle(degrees: number) { 
 			degrees = this.clampDegrees(degrees);
@@ -207,7 +207,7 @@ namespace JoviBit {
 		//% servo.fieldEditor="gridpicker"
 		//% servo.fieldOptions.width=220
 		//% servo.fieldOptions.columns=2
-		//% parts=microservo trackArgs=0
+		//% weight=41
 		//% subcategory=Servo
 		run(speed: number): void{
 			const degrees = this.clampDegrees(Math.map(speed, -100, 100, this.minAngle, this.maxAngle));
@@ -229,7 +229,7 @@ namespace JoviBit {
         //% servo.fieldEditor="gridpicker"
         //% servo.fieldOptions.width=220
         //% servo.fieldOptions.columns=2
-        //% parts=microservo trackArgs=0
+        //% weight=42
 		//% subcategory=Servo
 		setPulse(micros: number) {
 			micros = micros | 0;
@@ -248,7 +248,7 @@ namespace JoviBit {
 		//% servo.fieldEditor="gridpicker"
 		//% servo.fieldOptions.width=220
 		//% servo.fieldOptions.columns=2
-		//% parts=microservo tracksArgs=0
+		//% weight=43
 		//% subcategory=Servo
 		stop() {
 			if (this.angle != undefined)
@@ -281,7 +281,7 @@ namespace JoviBit {
 		//% servo.fieldEditor="gridpicker"
         //% servo.fieldOptions.width=220
         //% servo.fieldOptions.columns=2
-        //% parts=microservo trackArgs=0
+        //% weight=44
 		//% subcategory=Servo
 		setRange(minAngle: number, maxAngle: number) {
 			this.minAngle = Math.max(0, Math.min(90, minAngle | 0));
@@ -293,6 +293,7 @@ namespace JoviBit {
 		 */
 		//% blockId=servostoponneutral block="establece paro en %servo en la posición neutral"
 		//% enabled.shadow=toggleOnOff
+        //% weight=45
 		//% subcategory=Servo
 		public setStopOnNeutral(enabled: boolean) {
 			this.stopOnNeutral = true;
