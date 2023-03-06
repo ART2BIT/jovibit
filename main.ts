@@ -270,6 +270,14 @@ namespace JoviBit {
         }
 
         /**
+		 * 
+		 * Obtienes el angulo máximo para el servo
+		 */
+        public get MaxAngle() {
+            return this.maxAngle;
+		}
+
+		/**
          * Muestra el angulo máximo
 		 * @param minAngle el angulo mínimo de 0 a 90
 		 * @param maxAngle el angulo máximo de 90 a 180
@@ -285,9 +293,6 @@ namespace JoviBit {
 		//% subcategory=Servo
         //% group="Configuration"
         //% blockGap=8
-        public get MaxAngle() {
-            return this.maxAngle;
-		}
 		setRange(minAngle: number, maxAngle: number) {
 			this.minAngle = Math.max(0, Math.min(90, minAngle | 0));
 			this.maxAngle = Math.max(90, Math.min(180, maxAngle | 0));
