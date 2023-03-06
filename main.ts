@@ -754,5 +754,4 @@ namespace pinsHelper {
 		
 			return truePin;
 		}
-	}
 }
