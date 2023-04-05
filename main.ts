@@ -107,7 +107,7 @@ namespace JoviBit {
 
 		// read pulse
 		let d = pins.pulseIn(truePin, PulseValue.High, 25000);
-		let distancia = d / 29 / 2;
+		let distancia = d / 58;
 
 		if (distancia > 400) {
 			distancia = 401;
