@@ -172,7 +172,7 @@ namespace JoviBit {
             return degrees;
 		}
 		/**
-		 * Establece el angulo del servo
+		 * Establece el angulo o velocidad del servo
 		 */
 		//% blockId=servoangle block="establece el angulo %servo a %degrees=protractorPicker °"
 		//% degrees.defl=90
