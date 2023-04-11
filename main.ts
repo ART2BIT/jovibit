@@ -101,7 +101,7 @@ namespace JoviBit {
 		pins.setPull(truePin, PinPullMode.PullNone);
 		pins.digitalWritePin(truePin, 0);
 		control.waitMicros(2);
-		pins.digitalWritePin(truePin, 0);
+		pins.digitalWritePin(truePin, 1);
 		control.waitMicros(10);
 		pins.digitalWritePin(truePin, 0);
 
